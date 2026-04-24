@@ -43,7 +43,17 @@ type ProfileRow = {
   email: string | null
 }
 
-type ShowWithVisibility = ShowBudgetSummaryRow & {
+type ShowWithVisibility = Omit<
+  ShowBudgetSummaryRow,
+  'show_name' | 'show_number' | 'client_name' | 'venue_name' | 'city' | 'state' | 'status'
+> & {
+  show_name: string
+  show_number: string
+  client_name: string
+  venue_name: string
+  city: string
+  state: string
+  status: string
   can_view_financials: boolean
   pm_label: string | null
   risk_flag: 'healthy' | 'warning' | 'risk'
@@ -111,7 +121,6 @@ export default async function AllShowsPage() {
     ])
   )
 
-  // Hard tenant scope
   const orgScopedShows = (allSummaries ?? []).filter((show) => orgShowIds.has(show.show_id))
 
   let visibleShows: ShowBudgetSummaryRow[] = []
@@ -211,7 +220,6 @@ export default async function AllShowsPage() {
       ...ownedShowIds,
     ])
 
-    // PMs can browse org shows, but finance only on assigned/owned shows
     visibleShows = orgScopedShows
   }
 
@@ -270,32 +278,32 @@ export default async function AllShowsPage() {
     const pmMembershipId =
       ownership?.lead_membership_id ?? ownership?.created_by_membership_id ?? null
 
-return {
-  ...show,
-  show_name: show.show_name ?? 'Untitled Show',
-  show_number: show.show_number ?? '',
-  client_name: show.client_name ?? '',
-  venue_name: show.venue_name ?? '',
-  city: show.city ?? '',
-  state: show.state ?? '',
-  status: show.status ?? 'draft',
-  pm_label: pmMembershipId ? pmLabelMap.get(pmMembershipId) ?? null : null,
-  can_view_financials: financeVisibleIds.has(show.show_id),
-  budget_status:
-    Number(show.total_estimated_cost ?? 0) <= 0 ? 'missing' : 'ready',
-  freelancer_status:
-    Number(show.vendor_total ?? 0) <= 0 ? 'missing' : 'assigned',
-  risk_flag:
-    !pmMembershipId
-      ? 'risk'
-      : Number(show.total_estimated_cost ?? 0) <= 0
-        ? 'risk'
-        : Number(show.margin_percent ?? 0) < 20
+    return {
+      ...show,
+      show_name: show.show_name ?? 'Untitled Show',
+      show_number: show.show_number ?? '',
+      client_name: show.client_name ?? '',
+      venue_name: show.venue_name ?? '',
+      city: show.city ?? '',
+      state: show.state ?? '',
+      status: show.status ?? 'draft',
+      pm_label: pmMembershipId ? pmLabelMap.get(pmMembershipId) ?? null : null,
+      can_view_financials: financeVisibleIds.has(show.show_id),
+      budget_status:
+        Number(show.total_estimated_cost ?? 0) <= 0 ? 'missing' : 'ready',
+      freelancer_status:
+        Number(show.vendor_total ?? 0) <= 0 ? 'missing' : 'assigned',
+      risk_flag:
+        !pmMembershipId
           ? 'risk'
-          : Number(show.margin_percent ?? 0) < 30
-            ? 'warning'
-            : 'healthy',
-}
+          : Number(show.total_estimated_cost ?? 0) <= 0
+            ? 'risk'
+            : Number(show.margin_percent ?? 0) < 20
+              ? 'risk'
+              : Number(show.margin_percent ?? 0) < 30
+                ? 'warning'
+                : 'healthy',
+    }
   })
 
   return <AllShowsPageShell shows={mappedShows} />
