@@ -80,11 +80,14 @@ export default async function NewShowPage() {
     name: userDisplayMap.get(row.user_id)?.label ?? row.user_id.slice(0, 8),
   }))
 
-  return (
-    <NewShowForm
-      venues={venues ?? []}
-      isLeadership={leadership}
-      pmOptions={pmOptions}
-    />
-  )
+return (
+  <NewShowForm
+    venues={(venues ?? []).map((venue) => ({
+      ...venue,
+      is_active: venue.is_active ?? undefined,
+    }))}
+    isLeadership={leadership}
+    pmOptions={pmOptions}
+  />
+)
 }
