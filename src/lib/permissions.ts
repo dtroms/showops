@@ -13,6 +13,7 @@ export type ShowStatus =
   | 'planning'
   | 'active'
   | 'completed'
+  | 'financial_closed'
   | 'locked'
   | 'archived'
 
@@ -37,11 +38,12 @@ export function normalizeShowStatus(status: string | null | undefined): ShowStat
   if (value === 'planning') return 'planning'
   if (value === 'active' || value === 'in_progress') return 'active'
   if (value === 'completed') return 'completed'
+  if (value === 'financial_closed') return 'financial_closed'
   if (value === 'locked') return 'locked'
   if (value === 'archived') return 'archived'
+
   return 'draft'
 }
-
 export function canAssignLeadershipRoles(role: OrgRole | null | undefined): boolean {
   return role === 'owner' || role === 'org_admin'
 }
