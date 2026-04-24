@@ -544,12 +544,21 @@ return a.vendorName.localeCompare(b.vendorName)
   nearbyVendors.sort((a, b) => {
     if (a.preferredVendor !== b.preferredVendor) return a.preferredVendor ? -1 : 1
 
-    const aHasDistance = typeof a.distanceMiles === 'number'
-    const bHasDistance = typeof b.distanceMiles === 'number'
-    if (aHasDistance && bHasDistance) return a.distanceMiles - b.distanceMiles
-    if (aHasDistance !== bHasDistance) return aHasDistance ? -1 : 1
+    const aDistance =
+  typeof a.distanceMiles === 'number' ? a.distanceMiles : null
 
-    return a.vendorName.localeCompare(b.vendorName)
+const bDistance =
+  typeof b.distanceMiles === 'number' ? b.distanceMiles : null
+
+if (aDistance !== null && bDistance !== null) {
+  return aDistance - bDistance
+}
+
+if (aDistance !== null || bDistance !== null) {
+  return aDistance !== null ? -1 : 1
+}
+
+return a.vendorName.localeCompare(b.vendorName)
   })
 
   return (
