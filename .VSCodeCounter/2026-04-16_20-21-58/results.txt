@@ -1,0 +1,280 @@
+Date : 2026-04-16 20:21:58
+Directory : c:\Users\Dale\Desktop\clean-signal-saas\src
+Total : 166 files,  23729 codes, 64 comments, 3366 blanks, all 27159 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |        119 |     15,315 |          2 |      1,861 |     17,178 |
+| TypeScript     |         45 |      8,392 |         62 |      1,499 |      9,953 |
+| MS SQL         |          1 |         21 |          0 |          6 |         27 |
+| PostCSS        |          1 |          1 |          0 |          0 |          1 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                            | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                               |        166 |     23,729 |         64 |      3,366 |     27,159 |
+| app                                                                                                             |         80 |     12,166 |         25 |      1,944 |     14,135 |
+| app (Files)                                                                                                     |          3 |         17 |          0 |          1 |         18 |
+| app\(app)                                                                                                       |         37 |      4,382 |          2 |        580 |      4,964 |
+| app\(app) (Files)                                                                                               |          1 |        120 |          0 |         21 |        141 |
+| app\(app)\audit                                                                                                 |          1 |         48 |          0 |          9 |         57 |
+| app\(app)\dashboard                                                                                             |          1 |        311 |          0 |         52 |        363 |
+| app\(app)\gear                                                                                                  |          1 |         34 |          0 |          5 |         39 |
+| app\(app)\profile                                                                                               |          1 |         33 |          0 |          5 |         38 |
+| app\(app)\reports                                                                                               |          1 |         30 |          2 |          5 |         37 |
+| app\(app)\settings                                                                                              |          5 |        431 |          0 |         52 |        483 |
+| app\(app)\settings\billing                                                                                      |          1 |        118 |          0 |         12 |        130 |
+| app\(app)\settings\budget-targets                                                                               |          1 |        236 |          0 |         28 |        264 |
+| app\(app)\settings\profile                                                                                      |          1 |         33 |          0 |          5 |         38 |
+| app\(app)\settings\team                                                                                         |          1 |         30 |          0 |          5 |         35 |
+| app\(app)\settings\users                                                                                        |          1 |         14 |          0 |          2 |         16 |
+| app\(app)\shows                                                                                                 |         15 |      2,843 |          0 |        357 |      3,200 |
+| app\(app)\shows (Files)                                                                                         |          1 |        156 |          0 |         24 |        180 |
+| app\(app)\shows\[showId]                                                                                        |         13 |      2,609 |          0 |        322 |      2,931 |
+| app\(app)\shows\[showId] (Files)                                                                                |          2 |         81 |          0 |          9 |         90 |
+| app\(app)\shows\[showId]\budget-comparison                                                                      |          1 |        487 |          0 |         63 |        550 |
+| app\(app)\shows\[showId]\budget-export                                                                          |          1 |         13 |          0 |          3 |         16 |
+| app\(app)\shows\[showId]\budget-sheet                                                                           |          1 |        501 |          0 |         72 |        573 |
+| app\(app)\shows\[showId]\budget-summary                                                                         |          1 |        361 |          0 |         33 |        394 |
+| app\(app)\shows\[showId]\nearby-partners                                                                        |          1 |          9 |          0 |          1 |         10 |
+| app\(app)\shows\[showId]\notes                                                                                  |          1 |         51 |          0 |          9 |         60 |
+| app\(app)\shows\[showId]\show-details                                                                           |          1 |        240 |          0 |         25 |        265 |
+| app\(app)\shows\[showId]\supplies                                                                               |          1 |         94 |          0 |          9 |        103 |
+| app\(app)\shows\[showId]\team                                                                                   |          1 |        243 |          0 |         28 |        271 |
+| app\(app)\shows\[showId]\travel                                                                                 |          1 |         94 |          0 |          9 |        103 |
+| app\(app)\shows\[showId]\vendors                                                                                |          1 |        435 |          0 |         61 |        496 |
+| app\(app)\shows\new                                                                                             |          1 |         78 |          0 |         11 |         89 |
+| app\(app)\supplies                                                                                              |          1 |         20 |          0 |          4 |         24 |
+| app\(app)\team                                                                                                  |          1 |          4 |          0 |          1 |          5 |
+| app\(app)\vendors                                                                                               |          7 |        336 |          0 |         36 |        372 |
+| app\(app)\vendors (Files)                                                                                       |          1 |          4 |          0 |          1 |          5 |
+| app\(app)\vendors\business                                                                                      |          3 |        149 |          0 |         13 |        162 |
+| app\(app)\vendors\business (Files)                                                                              |          1 |         71 |          0 |          6 |         77 |
+| app\(app)\vendors\business\[vendorId]                                                                           |          1 |         70 |          0 |          6 |         76 |
+| app\(app)\vendors\business\new                                                                                  |          1 |          8 |          0 |          1 |          9 |
+| app\(app)\vendors\freelance                                                                                     |          3 |        183 |          0 |         22 |        205 |
+| app\(app)\vendors\freelance (Files)                                                                             |          1 |         97 |          0 |         13 |        110 |
+| app\(app)\vendors\freelance\[vendorId]                                                                          |          1 |         78 |          0 |          8 |         86 |
+| app\(app)\vendors\freelance\new                                                                                 |          1 |          8 |          0 |          1 |          9 |
+| app\(app)\venues                                                                                                |          2 |        172 |          0 |         33 |        205 |
+| app\(auth)                                                                                                      |          2 |        111 |          0 |         22 |        133 |
+| app\(auth)\login                                                                                                |          1 |         55 |          0 |         11 |         66 |
+| app\(auth)\signup                                                                                               |          1 |         56 |          0 |         11 |         67 |
+| app\(platform-admin)                                                                                            |          4 |        182 |          0 |         31 |        213 |
+| app\(platform-admin)\admin                                                                                      |          4 |        182 |          0 |         31 |        213 |
+| app\(platform-admin)\admin (Files)                                                                              |          2 |        126 |          0 |         21 |        147 |
+| app\(platform-admin)\admin\organizations                                                                        |          2 |         56 |          0 |         10 |         66 |
+| app\(platform-admin)\admin\organizations (Files)                                                                |          1 |         47 |          0 |          9 |         56 |
+| app\(platform-admin)\admin\organizations\[organizationId]                                                       |          1 |          9 |          0 |          1 |         10 |
+| app\actions                                                                                                     |         27 |      6,742 |         23 |      1,196 |      7,961 |
+| app\api                                                                                                         |          5 |        645 |          0 |         96 |        741 |
+| app\api\show-vendor-conflicts                                                                                   |          1 |         37 |          0 |          8 |         45 |
+| app\api\shows                                                                                                   |          1 |        515 |          0 |         70 |        585 |
+| app\api\shows\[showId]                                                                                          |          1 |        515 |          0 |         70 |        585 |
+| app\api\shows\[showId]\budget-export                                                                            |          1 |        515 |          0 |         70 |        585 |
+| app\api\stripe                                                                                                  |          3 |         93 |          0 |         18 |        111 |
+| app\api\stripe\checkout                                                                                         |          1 |         54 |          0 |         11 |         65 |
+| app\api\stripe\portal                                                                                           |          1 |         32 |          0 |          6 |         38 |
+| app\api\stripe\webhook                                                                                          |          1 |          7 |          0 |          1 |          8 |
+| app\finish-setup                                                                                                |          1 |         51 |          0 |         10 |         61 |
+| app\invite                                                                                                      |          1 |         36 |          0 |          8 |         44 |
+| components                                                                                                      |         74 |     10,430 |          0 |      1,212 |     11,642 |
+| components (Files)                                                                                              |          2 |        156 |          0 |         25 |        181 |
+| components\audit                                                                                                |          1 |        304 |          0 |         40 |        344 |
+| components\auth                                                                                                 |          1 |        108 |          0 |         16 |        124 |
+| components\budget                                                                                               |          1 |        120 |          0 |         19 |        139 |
+| components\dashboard                                                                                            |          9 |      1,023 |          0 |        121 |      1,144 |
+| components\master-data                                                                                          |         20 |      1,422 |          0 |        159 |      1,581 |
+| components\master-data\gear                                                                                     |          5 |        342 |          0 |         38 |        380 |
+| components\master-data\supplies                                                                                 |          5 |        299 |          0 |         34 |        333 |
+| components\master-data\vendors                                                                                  |          5 |        392 |          0 |         40 |        432 |
+| components\master-data\venues                                                                                   |          5 |        389 |          0 |         47 |        436 |
+| components\platform-admin                                                                                       |          1 |        303 |          0 |         48 |        351 |
+| components\settings                                                                                             |          4 |        883 |          0 |        103 |        986 |
+| components\show-detail                                                                                          |         21 |      3,714 |          0 |        403 |      4,117 |
+| components\shows                                                                                                |          6 |        697 |          0 |         81 |        778 |
+| components\vendors                                                                                              |          7 |      1,623 |          0 |        184 |      1,807 |
+| components\vendors (Files)                                                                                      |          5 |      1,460 |          0 |        170 |      1,630 |
+| components\vendors\shared                                                                                       |          2 |        163 |          0 |         14 |        177 |
+| components\venues                                                                                               |          1 |         77 |          0 |         13 |         90 |
+| lib                                                                                                             |         12 |      1,133 |         39 |        210 |      1,382 |
+| lib (Files)                                                                                                     |          8 |      1,060 |         39 |        199 |      1,298 |
+| lib\supabase                                                                                                    |          4 |         73 |          0 |         11 |         84 |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                        | language       | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\audit\page.tsx                                            | TypeScript JSX |         48 |          0 |          9 |         57 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\dashboard\page.tsx                                        | TypeScript JSX |        311 |          0 |         52 |        363 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\gear\page.tsx                                             | TypeScript JSX |         34 |          0 |          5 |         39 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\layout.tsx                                                | TypeScript JSX |        120 |          0 |         21 |        141 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\profile\page.tsx                                          | TypeScript JSX |         33 |          0 |          5 |         38 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\reports\page.tsx                                          | TypeScript JSX |         30 |          2 |          5 |         37 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\billing\page.tsx                                 | TypeScript JSX |        118 |          0 |         12 |        130 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\budget-targets\page.tsx                          | TypeScript JSX |        236 |          0 |         28 |        264 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\profile\page.tsx                                 | TypeScript JSX |         33 |          0 |          5 |         38 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\team\page.tsx                                    | TypeScript JSX |         30 |          0 |          5 |         35 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\users\page.tsx                                   | TypeScript JSX |         14 |          0 |          2 |         16 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\budget-comparison\page.tsx                 | TypeScript JSX |        487 |          0 |         63 |        550 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\budget-export\route.ts                     | TypeScript     |         13 |          0 |          3 |         16 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\budget-sheet\page.tsx                      | TypeScript JSX |        501 |          0 |         72 |        573 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\budget-summary\page.tsx                    | TypeScript JSX |        361 |          0 |         33 |        394 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\layout.tsx                                 | TypeScript JSX |         72 |          0 |          8 |         80 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\nearby-partners\page.tsx                   | TypeScript JSX |          9 |          0 |          1 |         10 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\notes\page.tsx                             | TypeScript JSX |         51 |          0 |          9 |         60 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\page.tsx                                   | TypeScript JSX |          9 |          0 |          1 |         10 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\show-details\page.tsx                      | TypeScript JSX |        240 |          0 |         25 |        265 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\supplies\page.tsx                          | TypeScript JSX |         94 |          0 |          9 |        103 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\team\page.tsx                              | TypeScript JSX |        243 |          0 |         28 |        271 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\travel\page.tsx                            | TypeScript JSX |         94 |          0 |          9 |        103 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\vendors\page.tsx                           | TypeScript JSX |        435 |          0 |         61 |        496 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\new\page.tsx                                        | TypeScript JSX |         78 |          0 |         11 |         89 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\page.tsx                                            | TypeScript JSX |        156 |          0 |         24 |        180 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\supplies\page.tsx                                         | TypeScript JSX |         20 |          0 |          4 |         24 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\team\page.tsx                                             | TypeScript JSX |          4 |          0 |          1 |          5 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\business\[vendorId]\page.tsx                      | TypeScript JSX |         70 |          0 |          6 |         76 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\business\new\page.tsx                             | TypeScript JSX |          8 |          0 |          1 |          9 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\business\page.tsx                                 | TypeScript JSX |         71 |          0 |          6 |         77 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\freelance\[vendorId]\page.tsx                     | TypeScript JSX |         78 |          0 |          8 |         86 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\freelance\new\page.tsx                            | TypeScript JSX |          8 |          0 |          1 |          9 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\freelance\page.tsx                                | TypeScript JSX |         97 |          0 |         13 |        110 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\page.tsx                                          | TypeScript JSX |          4 |          0 |          1 |          5 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\venues\page.tsx                                           | TypeScript JSX |         25 |          0 |          4 |         29 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\venues\venues.ts                                          | TypeScript     |        147 |          0 |         29 |        176 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(auth)\login\page.tsx                                           | TypeScript JSX |         55 |          0 |         11 |         66 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(auth)\signup\page.tsx                                          | TypeScript JSX |         56 |          0 |         11 |         67 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(platform-admin)\admin\layout.tsx                               | TypeScript JSX |         55 |          0 |         12 |         67 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(platform-admin)\admin\organizations\[organizationId]\page.tsx  | TypeScript JSX |          9 |          0 |          1 |         10 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(platform-admin)\admin\organizations\page.tsx                   | TypeScript JSX |         47 |          0 |          9 |         56 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\(platform-admin)\admin\page.tsx                                 | TypeScript JSX |         71 |          0 |          9 |         80 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\accept-invite.ts                                        | TypeScript     |        141 |          1 |         29 |        171 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\audit-logs.ts                                           | TypeScript     |        101 |          0 |         18 |        119 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\auth.ts                                                 | TypeScript     |         69 |          0 |         20 |         89 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\budget-lines.ts                                         | TypeScript     |        685 |          0 |        106 |        791 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\budget-targets.ts                                       | TypeScript     |         91 |          0 |         24 |        115 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\budget-versions.ts                                      | TypeScript     |        719 |         15 |        100 |        834 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\freelancer-ratings.ts                                   | TypeScript     |        102 |          0 |         23 |        125 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\gear.ts                                                 | TypeScript     |        219 |          0 |         47 |        266 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\invitations.ts                                          | TypeScript     |        218 |          1 |         46 |        265 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\nearby-partners.ts                                      | TypeScript     |        261 |          0 |         47 |        308 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\organization-financial-settings.ts                      | TypeScript     |         55 |          0 |         16 |         71 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\platform-admin-polish.ts                                | TypeScript     |         22 |          2 |          7 |         31 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\platform-admin.ts                                       | TypeScript     |        276 |          3 |         62 |        341 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\platform-support.ts                                     | TypeScript     |         98 |          0 |         24 |        122 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\profile-settings.ts                                     | TypeScript     |         56 |          0 |         13 |         69 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\setup.ts                                                | TypeScript     |         31 |          0 |         10 |         41 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\show-files.ts                                           | TypeScript     |         82 |          0 |         24 |        106 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\show-memberships.ts                                     | TypeScript     |        561 |          0 |         81 |        642 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\show-vendors.ts                                         | TypeScript     |        458 |          0 |         73 |        531 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\shows.ts                                                | TypeScript     |        560 |          0 |         86 |        646 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\supplies.ts                                             | TypeScript     |        107 |          0 |         29 |        136 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\team-structure.ts                                       | TypeScript     |        126 |          0 |         26 |        152 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\users.ts                                                | TypeScript     |        698 |          1 |        121 |        820 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\vendor-service-area-editor.tsx                          | TypeScript JSX |        288 |          0 |         35 |        323 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\vendor-service-areas.ts                                 | TypeScript     |        214 |          0 |         41 |        255 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\vendors.ts                                              | TypeScript     |        362 |          0 |         62 |        424 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\venues.ts                                               | TypeScript     |        142 |          0 |         26 |        168 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\show-vendor-conflicts\route.ts                              | TypeScript     |         37 |          0 |          8 |         45 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\shows\[showId]\budget-export\route.ts                       | TypeScript     |        515 |          0 |         70 |        585 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\stripe\checkout\route.ts                                    | TypeScript     |         54 |          0 |         11 |         65 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\stripe\portal\route.ts                                      | TypeScript     |         32 |          0 |          6 |         38 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\stripe\webhook\route.ts                                     | TypeScript     |          7 |          0 |          1 |          8 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\finish-setup\page.tsx                                           | TypeScript JSX |         51 |          0 |         10 |         61 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\globals.css                                                     | PostCSS        |          1 |          0 |          0 |          1 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\invite\page.tsx                                                 | TypeScript JSX |         36 |          0 |          8 |         44 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\layout.tsx                                                      | TypeScript JSX |         12 |          0 |          0 |         12 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\app\page.tsx                                                        | TypeScript JSX |          4 |          0 |          1 |          5 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\app-shell.tsx                                            | TypeScript JSX |        139 |          0 |         24 |        163 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\audit\audit-log-table.tsx                                | TypeScript JSX |        304 |          0 |         40 |        344 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\auth\accept-invite-form.tsx                              | TypeScript JSX |        108 |          0 |         16 |        124 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\budget\freelancer-rating-modal.tsx                       | TypeScript JSX |        120 |          0 |         19 |        139 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-chart-filter.tsx                     | TypeScript JSX |         31 |          0 |          2 |         33 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-expanded-row.tsx                     | TypeScript JSX |         43 |          0 |          5 |         48 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-filtered-chart.tsx                   | TypeScript JSX |        112 |          0 |         13 |        125 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-shell.tsx                            | TypeScript JSX |         91 |          0 |         13 |        104 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-show-row.tsx                         | TypeScript JSX |         51 |          0 |          5 |         56 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-show-table.tsx                       | TypeScript JSX |        158 |          0 |         14 |        172 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\leadership-dashboard-shell.tsx                 | TypeScript JSX |        199 |          0 |         24 |        223 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\leadership-pm-group.tsx                        | TypeScript JSX |        139 |          0 |         19 |        158 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\quarterly-profit-breakdown.tsx                 | TypeScript JSX |        199 |          0 |         26 |        225 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-filter-bar.tsx                     | TypeScript JSX |         52 |          0 |          3 |         55 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-form-modal.tsx                     | TypeScript JSX |        106 |          0 |         15 |        121 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-page-shell.tsx                     | TypeScript JSX |         83 |          0 |         14 |         97 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-status-badge.tsx                   | TypeScript JSX |         11 |          0 |          0 |         11 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-table.tsx                          | TypeScript JSX |         90 |          0 |          6 |         96 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supplies-filter-bar.tsx             | TypeScript JSX |         34 |          0 |          2 |         36 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supplies-page-shell.tsx             | TypeScript JSX |         68 |          0 |         12 |         80 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supplies-table.tsx                  | TypeScript JSX |         87 |          0 |          6 |         93 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supply-form-modal.tsx               | TypeScript JSX |         99 |          0 |         14 |        113 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supply-status-badge.tsx             | TypeScript JSX |         11 |          0 |          0 |         11 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-filter-bar.tsx                | TypeScript JSX |         49 |          0 |          4 |         53 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-form-modal.tsx                | TypeScript JSX |        152 |          0 |         19 |        171 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-page-shell.tsx                | TypeScript JSX |         78 |          0 |         11 |         89 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-status-badge.tsx              | TypeScript JSX |         11 |          0 |          0 |         11 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-table.tsx                     | TypeScript JSX |        102 |          0 |          6 |        108 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venue-form-modal.tsx                  | TypeScript JSX |        149 |          0 |         21 |        170 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venue-status-badge.tsx                | TypeScript JSX |         13 |          0 |          0 |         13 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venues-filter-bar.tsx                 | TypeScript JSX |         35 |          0 |          3 |         38 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venues-page-shell.tsx                 | TypeScript JSX |         77 |          0 |         13 |         90 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venues-table.tsx                      | TypeScript JSX |        115 |          0 |         10 |        125 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\platform-admin\admin-organizations-page-shell.tsx        | TypeScript JSX |        303 |          0 |         48 |        351 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\settings\organization-users-page-shell.tsx               | TypeScript JSX |        510 |          0 |         57 |        567 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\settings\profile-settings-form.tsx                       | TypeScript JSX |         82 |          0 |         13 |         95 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\settings\team-invite-panel.tsx                           | TypeScript JSX |        179 |          0 |         20 |        199 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\settings\team-structure-panel.tsx                        | TypeScript JSX |        112 |          0 |         13 |        125 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\023_fix_show_memberships_assignment_type.sql | MS SQL         |         21 |          0 |          6 |         27 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\add-line-item-modal.tsx                      | TypeScript JSX |        389 |          0 |         36 |        425 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\budget-line-form-vendor.tsx                  | TypeScript JSX |        276 |          0 |         29 |        305 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\budget-sheet-section.tsx                     | TypeScript JSX |        184 |          0 |         24 |        208 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\budget-sheet-table.tsx                       | TypeScript JSX |        166 |          0 |         24 |        190 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\budget-summary-card.tsx                      | TypeScript JSX |         30 |          0 |          6 |         36 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\edit-line-item-modal.tsx                     | TypeScript JSX |        355 |          0 |         30 |        385 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\gear-budget-section.tsx                      | TypeScript JSX |        137 |          0 |         18 |        155 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\nearby-partners-panel.tsx                    | TypeScript JSX |        317 |          0 |         31 |        348 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-details-form.tsx                        | TypeScript JSX |        203 |          0 |         23 |        226 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-header.tsx                              | TypeScript JSX |        111 |          0 |         12 |        123 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-notes-panel.tsx                         | TypeScript JSX |        176 |          0 |         17 |        193 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-shell.tsx                               | TypeScript JSX |         65 |          0 |         10 |         75 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-side-nav.tsx                            | TypeScript JSX |         47 |          0 |          3 |         50 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-team-page-shell.tsx                     | TypeScript JSX |        305 |          0 |         41 |        346 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-vendor-form.tsx                         | TypeScript JSX |         56 |          0 |         12 |         68 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-vendor-table.tsx                        | TypeScript JSX |        118 |          0 |          6 |        124 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-vendors-page-shell.tsx                  | TypeScript JSX |        521 |          0 |         46 |        567 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\sticky-budget-summary.tsx                    | TypeScript JSX |         96 |          0 |         10 |        106 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\vendor-budget-add-back.tsx                   | TypeScript JSX |         59 |          0 |          8 |         67 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\vendor-search-select.tsx                     | TypeScript JSX |         82 |          0 |         11 |         93 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\all-shows-filter-bar.tsx                           | TypeScript JSX |         83 |          0 |          8 |         91 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\all-shows-page-shell.tsx                           | TypeScript JSX |         77 |          0 |         10 |         87 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\all-shows-sort-select.tsx                          | TypeScript JSX |         23 |          0 |          1 |         24 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\all-shows-table.tsx                                | TypeScript JSX |        174 |          0 |         18 |        192 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\new-show-form.tsx                                  | TypeScript JSX |        125 |          0 |         17 |        142 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\venue-select-fields.tsx                            | TypeScript JSX |        215 |          0 |         27 |        242 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\trial-banner.tsx                                         | TypeScript JSX |         17 |          0 |          1 |         18 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\freelancer-profile-form.tsx                      | TypeScript JSX |        247 |          0 |         30 |        277 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\shared\coverage-and-travel-section.tsx           | TypeScript JSX |         57 |          0 |          5 |         62 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\shared\primary-service-area-section.tsx          | TypeScript JSX |        106 |          0 |          9 |        115 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\vendor-form-modal.tsx                            | TypeScript JSX |        362 |          0 |         40 |        402 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\vendor-partner-profile-form.tsx                  | TypeScript JSX |        381 |          0 |         43 |        424 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\vendor-partners-page-shell.tsx                   | TypeScript JSX |        288 |          0 |         34 |        322 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\vendor-service-area-editor.tsx                   | TypeScript JSX |        182 |          0 |         23 |        205 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\components\venues\venues-page-shell.tsx                             | TypeScript JSX |         77 |          0 |         13 |         90 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\audit.ts                                                        | TypeScript     |        209 |          4 |         18 |        231 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\auth-context.ts                                                 | TypeScript     |        218 |         35 |         41 |        294 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\format.ts                                                       | TypeScript     |         13 |          0 |          3 |         16 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\permissions.ts                                                  | TypeScript     |        386 |          0 |         90 |        476 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\show-access.ts                                                  | TypeScript     |         86 |          0 |         14 |        100 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\stripe.ts                                                       | TypeScript     |          2 |          0 |          2 |          4 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\supabase\admin.ts                                               | TypeScript     |         17 |          0 |          4 |         21 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\supabase\client.ts                                              | TypeScript     |          7 |          0 |          1 |          8 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\supabase\middleware.ts                                          | TypeScript     |         26 |          0 |          4 |         30 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\supabase\server.ts                                              | TypeScript     |         23 |          0 |          2 |         25 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\team-scope.ts                                                   | TypeScript     |         84 |          0 |         18 |        102 |
+| c:\Users\Dale\Desktop\clean-signal-saas\src\lib\user-display.ts                                                 | TypeScript     |         62 |          0 |         13 |         75 |
+| Total                                                                                                           |                |     23,729 |         64 |      3,366 |     27,159 |
++-----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

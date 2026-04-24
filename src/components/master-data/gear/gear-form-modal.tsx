@@ -15,6 +15,10 @@ type GearItem = {
 
 const initialState: GearState = {}
 
+function fieldClass() {
+  return 'mt-1 w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 text-sm text-white outline-none placeholder:text-slate-500'
+}
+
 function SubmitButton({ mode }: { mode: 'create' | 'edit' }) {
   const { pending } = useFormStatus()
 
@@ -22,7 +26,7 @@ function SubmitButton({ mode }: { mode: 'create' | 'edit' }) {
     <button
       type="submit"
       disabled={pending}
-      className="rounded-lg bg-slate-900 px-4 py-2 text-white disabled:opacity-50"
+      className="rounded-2xl bg-white px-4 py-2 text-sm font-medium text-slate-950 disabled:opacity-50"
     >
       {pending ? 'Saving...' : mode === 'edit' ? 'Save Gear' : 'Create Gear'}
     </button>
@@ -42,13 +46,16 @@ export function GearFormModal({
   const [state, formAction] = useFormState(action, initialState)
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+      <div className="w-full max-w-2xl rounded-[28px] border border-white/10 bg-slate-950 p-6 shadow-2xl">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-xl font-bold">
+          <h3 className="text-xl font-bold text-white">
             {mode === 'edit' ? 'Edit Gear Item' : 'Add Gear Item'}
           </h3>
-          <button onClick={onClose} className="rounded-lg border px-3 py-2 text-sm">
+          <button
+            onClick={onClose}
+            className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white"
+          >
             Close
           </button>
         </div>
@@ -59,61 +66,65 @@ export function GearFormModal({
           ) : null}
 
           <div>
-            <label className="block text-sm font-medium">Item Name</label>
+            <label className="block text-sm font-medium text-slate-300">Item Name</label>
             <input
               name="itemName"
               defaultValue={gearItem?.item_name ?? ''}
               required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className={fieldClass()}
             />
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium">Category</label>
+              <label className="block text-sm font-medium text-slate-300">Category</label>
               <input
                 name="categoryName"
                 defaultValue={gearItem?.category_name ?? ''}
                 required
-                className="mt-1 w-full rounded-lg border px-3 py-2"
+                className={fieldClass()}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Subcategory</label>
+              <label className="block text-sm font-medium text-slate-300">Subcategory</label>
               <input
                 name="subcategoryName"
                 defaultValue={gearItem?.subcategory_name ?? ''}
-                className="mt-1 w-full rounded-lg border px-3 py-2"
+                className={fieldClass()}
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Internal Cost</label>
+            <label className="block text-sm font-medium text-slate-300">Internal Cost</label>
             <input
               name="internalCost"
               type="number"
               step="0.01"
               defaultValue={gearItem?.internal_cost ?? ''}
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className={fieldClass()}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Notes</label>
+            <label className="block text-sm font-medium text-slate-300">Notes</label>
             <textarea
               name="notes"
               rows={4}
               defaultValue={gearItem?.notes ?? ''}
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className={fieldClass()}
             />
           </div>
 
-          {state.error ? <p className="text-sm text-red-600">{state.error}</p> : null}
-          {state.success ? <p className="text-sm text-emerald-600">Saved successfully.</p> : null}
+          {state.error ? <p className="text-sm text-rose-300">{state.error}</p> : null}
+          {state.success ? (
+            <p className="text-sm text-emerald-300">Saved successfully.</p>
+          ) : null}
 
-          <SubmitButton mode={mode} />
+          <div className="flex justify-end">
+            <SubmitButton mode={mode} />
+          </div>
         </form>
       </div>
     </div>

@@ -1,22 +1,84 @@
 import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { formatCurrency, formatShortDate } from '@/lib/format'
+import { requireMembershipContext } from '@/lib/auth-context'
+import { resolveShowAccess } from '@/lib/show-access'
+import {
+  canViewRevenue,
+  canViewShowProfitability,
+} from '@/lib/permissions'
+import { formatCurrency } from '@/lib/format'
 
-type FreelanceVendor = {
+type ShowRow = {
   id: string
-  vendor_name_snapshot: string
-  vendor_type_snapshot: string | null
-  service_type_snapshot: string | null
-  contact_name_snapshot: string | null
+  show_name: string | null
+  show_number: string | null
+  estimated_revenue: number | null
 }
 
-type ShowDetailsRow = {
-  venue_contact_name: string | null
-  venue_contact_email: string | null
-  venue_contact_phone: string | null
-  event_contact_name: string | null
-  event_contact_email: string | null
-  event_contact_phone: string | null
+type BudgetVersionRow = {
+  id: string
+  version_type: 'pre' | 'post'
+  version_name: string
+  is_current: boolean
+  created_at: string
+}
+
+type BudgetLineRow = {
+  id: string
+  version_id: string
+  section_type: string
+  subtotal: number | null
+}
+
+type FinancialSettings = {
+  company_owned_gear_percent: number
+}
+
+function normalizeSectionType(sectionType: string) {
+  if (sectionType === 'vendor') return 'freelance_labor'
+  return sectionType
+}
+
+function sumBySection(lines: BudgetLineRow[], sectionType: string) {
+  return lines.reduce((sum, item) => {
+    return normalizeSectionType(item.section_type) === sectionType
+      ? sum + Number(item.subtotal ?? 0)
+      : sum
+  }, 0)
+}
+
+function getMarginPercent(revenue: number, cost: number) {
+  if (!revenue) return 0
+  return Number((((revenue - cost) / revenue) * 100).toFixed(1))
+}
+
+function formatPercent(value: number) {
+  return `${value.toFixed(1)}%`
+}
+
+function toneForMargin(margin: number): 'default' | 'success' | 'warning' | 'danger' {
+  if (margin < 45) return 'danger'
+  if (margin < 50) return 'warning'
+  if (margin >= 60) return 'success'
+  return 'default'
+}
+
+function toneForProfit(profit: number): 'default' | 'success' | 'warning' | 'danger' {
+  return profit >= 0 ? 'success' : 'danger'
+}
+
+function cardToneClass(tone: 'default' | 'success' | 'warning' | 'danger') {
+  if (tone === 'success') return 'border-emerald-500/20 bg-emerald-500/[0.07]'
+  if (tone === 'warning') return 'border-amber-500/20 bg-amber-500/[0.07]'
+  if (tone === 'danger') return 'border-rose-500/20 bg-rose-500/[0.07]'
+  return 'border-white/10 bg-white/[0.03]'
+}
+
+function valueToneClass(tone: 'default' | 'success' | 'warning' | 'danger') {
+  if (tone === 'success') return 'text-emerald-300'
+  if (tone === 'warning') return 'text-amber-300'
+  if (tone === 'danger') return 'text-rose-300'
+  return 'text-white'
 }
 
 export default async function ShowBudgetSummaryPage({
@@ -26,240 +88,260 @@ export default async function ShowBudgetSummaryPage({
 }) {
   const { showId } = await params
   const supabase = await createClient()
+  const ctx = await requireMembershipContext()
+  const { organizationId, membership, orgRole } = ctx
 
-  const [
-    { data: summary, error: summaryError },
-    { data: vendors, error: vendorError },
-    { data: showDetails, error: showDetailsError },
-  ] = await Promise.all([
-    supabase
-      .from('show_budget_summaries')
-      .select('*')
-      .eq('show_id', showId)
-      .maybeSingle(),
-
-    supabase
-      .from('show_vendors')
-      .select(`
-        id,
-        vendor_name_snapshot,
-        vendor_type_snapshot,
-        service_type_snapshot,
-        contact_name_snapshot
-      `)
-      .eq('show_id', showId)
-      .order('vendor_name_snapshot', { ascending: true }),
-
+  const [{ data: show, error: showError }, { access }, { data: financialSettings, error: financialSettingsError }] = await Promise.all([
     supabase
       .from('shows')
-      .select(`
-        venue_contact_name,
-        venue_contact_email,
-        venue_contact_phone,
-        event_contact_name,
-        event_contact_email,
-        event_contact_phone
-      `)
+      .select('id, show_name, show_number, estimated_revenue')
       .eq('id', showId)
-      .maybeSingle(),
+      .eq('organization_id', organizationId)
+      .maybeSingle<ShowRow>(),
+    resolveShowAccess({
+      supabase,
+      showId,
+      organizationId,
+      membershipId: membership.id,
+      orgRole,
+    }),
+    supabase
+      .from('organization_financial_settings')
+      .select('company_owned_gear_percent')
+      .eq('organization_id', organizationId)
+      .maybeSingle<FinancialSettings>(),
   ])
 
-  if (summaryError) throw new Error(summaryError.message)
-  if (vendorError) throw new Error(vendorError.message)
-  if (showDetailsError) throw new Error(showDetailsError.message)
+  if (showError) throw new Error(showError.message)
+  if (financialSettingsError) throw new Error(financialSettingsError.message)
+  if (!show) notFound()
 
-  if (!summary) {
-    notFound()
+  const canViewRevenueValues = canViewRevenue(access)
+  const canViewProfitabilityValues = canViewShowProfitability(access)
+
+  const { data: versions, error: versionsError } = await supabase
+    .from('budget_versions')
+    .select('id, version_type, version_name, is_current, created_at')
+    .eq('show_id', showId)
+    .is('archived_at', null)
+    .order('created_at', { ascending: false })
+    .returns<BudgetVersionRow[]>()
+
+  if (versionsError) throw new Error(versionsError.message)
+
+  const budgetVersions = versions ?? []
+
+  const preVersion =
+    budgetVersions.find((version) => version.version_type === 'pre' && version.is_current) ??
+    budgetVersions.find((version) => version.version_type === 'pre') ??
+    null
+
+  const postVersion =
+    budgetVersions.find((version) => version.version_type === 'post' && version.is_current) ??
+    budgetVersions.find((version) => version.version_type === 'post') ??
+    null
+
+  const versionIds = [preVersion?.id, postVersion?.id].filter(Boolean) as string[]
+
+  let allBudgetLines: BudgetLineRow[] = []
+
+  if (versionIds.length > 0) {
+    const { data: lines, error: linesError } = await supabase
+      .from('show_budget_line_items')
+      .select('id, version_id, section_type, subtotal')
+      .eq('show_id', showId)
+      .in('version_id', versionIds)
+      .returns<BudgetLineRow[]>()
+
+    if (linesError) throw new Error(linesError.message)
+    allBudgetLines = lines ?? []
   }
 
-  const details = (showDetails ?? {}) as ShowDetailsRow
+  const preLines = preVersion
+    ? allBudgetLines.filter((line) => line.version_id === preVersion.id)
+    : []
 
-  const revenue = Number(summary.estimated_revenue ?? 0)
-  const totalCost = Number(summary.total_estimated_cost ?? 0)
-  const profit = Number(summary.projected_profit ?? 0)
-  const margin = summary.margin_percent
+  const postLines = postVersion
+    ? allBudgetLines.filter((line) => line.version_id === postVersion.id)
+    : []
 
-  const gearTotal = Number(summary.gear_total ?? 0)
-  const vendorTotal = Number(summary.vendor_total ?? 0)
-  const supplyTotal = Number(summary.supply_total ?? 0)
-  const travelTotal = Number(summary.travel_total ?? 0)
+  const revenue = Number(show.estimated_revenue ?? 0)
+  const companyOwnedGearPercent = Number(financialSettings?.company_owned_gear_percent ?? 2.5)
+  const allocation = revenue * (companyOwnedGearPercent / 100)
 
-  const freelanceVendors = ((vendors ?? []) as FreelanceVendor[]).filter(
-    (vendor) =>
-      vendor.vendor_type_snapshot === 'freelance' ||
-      vendor.vendor_type_snapshot === 'both'
-  )
+  const preGear = sumBySection(preLines, 'gear')
+  const preW2 = sumBySection(preLines, 'w2_labor')
+  const preFreelance = sumBySection(preLines, 'freelance_labor')
+  const preSupply = sumBySection(preLines, 'supply')
+  const preTravel = sumBySection(preLines, 'travel')
+  const preShipping = sumBySection(preLines, 'shipping')
+  const preExpedited = sumBySection(preLines, 'expedited')
+  const preTotal =
+    preGear + allocation + preW2 + preFreelance + preSupply + preTravel + preShipping + preExpedited
+  const preProfit = revenue - preTotal
+  const preMargin = getMarginPercent(revenue, preTotal)
+
+  const postGear = sumBySection(postLines, 'gear')
+  const postW2 = sumBySection(postLines, 'w2_labor')
+  const postFreelance = sumBySection(postLines, 'freelance_labor')
+  const postSupply = sumBySection(postLines, 'supply')
+  const postTravel = sumBySection(postLines, 'travel')
+  const postShipping = sumBySection(postLines, 'shipping')
+  const postExpedited = sumBySection(postLines, 'expedited')
+  const postTotal =
+    postGear + allocation + postW2 + postFreelance + postSupply + postTravel + postShipping + postExpedited
+  const postProfit = revenue - postTotal
+  const postMargin = getMarginPercent(revenue, postTotal)
+
+  const currentMode =
+    postVersion && access.showStatus === 'financial_closed' ? 'actual' : 'projected'
+
+  const activeCost = currentMode === 'actual' ? postTotal : preTotal
+  const activeProfit = currentMode === 'actual' ? postProfit : preProfit
+  const activeMargin = currentMode === 'actual' ? postMargin : preMargin
+
+  const rows = [
+    { label: 'Gear', pre: preGear, post: postGear },
+    { label: 'Allocated Gear', pre: allocation, post: allocation },
+    { label: 'W2 Labor', pre: preW2, post: postW2 },
+    { label: 'Freelance Labor', pre: preFreelance, post: postFreelance },
+    { label: 'Supplies', pre: preSupply, post: postSupply },
+    { label: 'Travel', pre: preTravel, post: postTravel },
+    { label: 'Shipping', pre: preShipping, post: postShipping },
+    { label: 'Expedited', pre: preExpedited, post: postExpedited },
+  ]
 
   return (
-    <div className="space-y-5">
-      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-              Show Dates
-            </p>
-            <p className="mt-1 text-sm font-semibold text-slate-900">
-              {formatShortDate(summary.start_date)} - {formatShortDate(summary.end_date)}
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-              Venue
-            </p>
-            <p className="mt-1 text-sm font-semibold text-slate-900">
-              {summary.venue_name ?? '—'}
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-              Location
-            </p>
-            <p className="mt-1 text-sm font-semibold text-slate-900">
-              {summary.city ?? '—'}
-              {summary.state ? `, ${summary.state}` : ''}
-            </p>
-          </div>
-        </div>
-      </div>
-
+    <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-slate-500">Estimated Revenue</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight">
-            {formatCurrency(revenue)}
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-slate-500">Estimated Cost</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight">
-            {formatCurrency(totalCost)}
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-emerald-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-slate-500">Projected Profit</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight text-emerald-600">
-            {formatCurrency(profit)}
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-slate-500">Margin</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight">
-            {margin ?? '—'}%
-          </p>
-        </div>
-      </div>
-
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="mb-4">
-          <h3 className="text-lg font-semibold">Budget Category Totals</h3>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-sm text-slate-500">Gear</p>
-            <p className="mt-2 text-2xl font-semibold">{formatCurrency(gearTotal)}</p>
+        <div className={`rounded-[24px] border p-5 ${cardToneClass('default')}`}>
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Revenue
           </div>
-
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-sm text-slate-500">Vendors</p>
-            <p className="mt-2 text-2xl font-semibold">{formatCurrency(vendorTotal)}</p>
+          <div className="mt-3 text-2xl font-semibold tracking-tight text-white">
+            {canViewRevenueValues ? formatCurrency(revenue) : '—'}
           </div>
+        </div>
 
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-sm text-slate-500">Supplies</p>
-            <p className="mt-2 text-2xl font-semibold">{formatCurrency(supplyTotal)}</p>
+        <div className={`rounded-[24px] border p-5 ${cardToneClass('default')}`}>
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Cost
           </div>
+          <div className="mt-3 text-2xl font-semibold tracking-tight text-white">
+            {canViewProfitabilityValues ? formatCurrency(activeCost) : '—'}
+          </div>
+        </div>
 
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-sm text-slate-500">Travel</p>
-            <p className="mt-2 text-2xl font-semibold">{formatCurrency(travelTotal)}</p>
+        <div
+          className={`rounded-[24px] border p-5 ${cardToneClass(
+            toneForProfit(activeProfit)
+          )}`}
+        >
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Profit
+          </div>
+          <div
+            className={`mt-3 text-2xl font-semibold tracking-tight ${valueToneClass(
+              toneForProfit(activeProfit)
+            )}`}
+          >
+            {canViewProfitabilityValues ? formatCurrency(activeProfit) : '—'}
+          </div>
+        </div>
+
+        <div
+          className={`rounded-[24px] border p-5 ${cardToneClass(
+            toneForMargin(activeMargin)
+          )}`}
+        >
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Margin
+          </div>
+          <div
+            className={`mt-3 text-2xl font-semibold tracking-tight ${valueToneClass(
+              toneForMargin(activeMargin)
+            )}`}
+          >
+            {canViewProfitabilityValues ? formatPercent(activeMargin) : '—'}
           </div>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="mb-4">
-          <h3 className="text-lg font-semibold">Assigned Freelance Labor</h3>
+      <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+        <div className="mb-5 flex items-center justify-between gap-3">
+          <div className="text-lg font-semibold text-white">Budget Summary</div>
+          <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-slate-300">
+            {currentMode === 'actual' ? 'Actual' : 'Projected'}
+          </div>
         </div>
 
-        {!freelanceVendors.length ? (
-          <div className="rounded-xl border border-dashed p-6 text-sm text-slate-500">
-            No freelance labor assigned yet..
-          </div>
-        ) : (
-          <div className="overflow-hidden rounded-xl border border-slate-200">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-slate-600">
-                <tr>
-                  <th className="px-4 py-3 font-semibold">Vendor</th>
-                  <th className="px-4 py-3 font-semibold">Position</th>
-                  <th className="px-4 py-3 font-semibold">Contact</th>
-                </tr>
-              </thead>
-              <tbody>
-                {freelanceVendors.map((vendor) => (
-                  <tr key={vendor.id} className="border-t border-slate-200">
-                    <td className="px-4 py-3 font-medium">{vendor.vendor_name_snapshot}</td>
-                    <td className="px-4 py-3">{vendor.service_type_snapshot ?? '—'}</td>
-                    <td className="px-4 py-3">{vendor.contact_name_snapshot ?? '—'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-
-      <div className="grid gap-4 xl:grid-cols-2">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold">Venue Contact</h3>
-          </div>
-
-          <div className="space-y-3">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm text-slate-500">Name</p>
-              <p className="mt-1 text-base font-semibold">{details.venue_contact_name ?? '—'}</p>
+        <div className="mb-5 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+          <div className="grid gap-4 md:grid-cols-3">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Company-Owned Gear Rate
+              </p>
+              <p className="mt-1 text-sm font-semibold text-white">
+                {formatPercent(companyOwnedGearPercent)}
+              </p>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm text-slate-500">Phone</p>
-              <p className="mt-1 text-base font-semibold">{details.venue_contact_phone ?? '—'}</p>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Allocation Amount
+              </p>
+              <p className="mt-1 text-sm font-semibold text-white">
+                {canViewProfitabilityValues ? formatCurrency(allocation) : '—'}
+              </p>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm text-slate-500">Email</p>
-              <p className="mt-1 text-base font-semibold">{details.venue_contact_email ?? '—'}</p>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Revenue Basis
+              </p>
+              <p className="mt-1 text-sm font-semibold text-white">
+                {canViewRevenueValues ? formatCurrency(revenue) : '—'}
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold">Client / Event Contact</h3>
+        <div className="overflow-hidden rounded-2xl border border-white/10">
+          <div className="grid grid-cols-[minmax(0,1fr)_160px_160px_140px_140px] bg-white/[0.03] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <div>Category</div>
+            <div>Pre-Show</div>
+            <div>Post-Show</div>
+            <div>Active</div>
+            <div>% of Revenue</div>
           </div>
 
-          <div className="space-y-3">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm text-slate-500">Name</p>
-              <p className="mt-1 text-base font-semibold">{details.event_contact_name ?? '—'}</p>
-            </div>
+          {rows.map((row) => {
+            const activeAmount = currentMode === 'actual' ? row.post : row.pre
+            const percentOfRevenue = revenue > 0 ? (activeAmount / revenue) * 100 : 0
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm text-slate-500">Phone</p>
-              <p className="mt-1 text-base font-semibold">{details.event_contact_phone ?? '—'}</p>
-            </div>
-
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm text-slate-500">Email</p>
-              <p className="mt-1 text-base font-semibold">{details.event_contact_email ?? '—'}</p>
-            </div>
-          </div>
+            return (
+              <div
+                key={row.label}
+                className="grid grid-cols-[minmax(0,1fr)_160px_160px_140px_140px] items-center border-t border-white/10 px-4 py-3 text-sm"
+              >
+                <div className="font-medium text-white">{row.label}</div>
+                <div className="text-slate-300">
+                  {canViewProfitabilityValues ? formatCurrency(row.pre) : '—'}
+                </div>
+                <div className="text-slate-300">
+                  {postVersion && canViewProfitabilityValues ? formatCurrency(row.post) : '—'}
+                </div>
+                <div className="font-medium text-white">
+                  {canViewProfitabilityValues ? formatCurrency(activeAmount) : '—'}
+                </div>
+                <div className="text-slate-300">
+                  {canViewRevenueValues && canViewProfitabilityValues
+                    ? formatPercent(percentOfRevenue)
+                    : '—'}
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>

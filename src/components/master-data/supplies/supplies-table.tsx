@@ -13,6 +13,14 @@ type SupplyItem = {
   is_active: boolean
 }
 
+function formatCurrency(value: number | null | undefined) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 2,
+  }).format(Number(value ?? 0))
+}
+
 export function SuppliesTable({
   supplyItems,
   onEdit,
@@ -24,32 +32,35 @@ export function SuppliesTable({
 
   if (!supplyItems.length) {
     return (
-      <div className="rounded-2xl border border-dashed bg-white p-6 text-sm text-slate-500">
+      <div className="rounded-[24px] border border-dashed border-white/10 bg-white/[0.03] p-6 text-sm text-slate-500">
         No supplies found.
       </div>
     )
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border bg-white">
+    <div className="overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03]">
       <table className="w-full text-left text-sm">
-        <thead className="bg-slate-50 text-slate-600">
+        <thead className="bg-white/[0.03] text-slate-500">
           <tr>
-            <th className="px-4 py-3">Supply</th>
-            <th className="px-4 py-3">Unit Type</th>
-            <th className="px-4 py-3">Default Cost</th>
-            <th className="px-4 py-3">Status</th>
-            <th className="px-4 py-3">Actions</th>
+            <th className="px-4 py-3 font-semibold">Supply</th>
+            <th className="px-4 py-3 font-semibold">Unit Type</th>
+            <th className="px-4 py-3 font-semibold">Default Cost</th>
+            <th className="px-4 py-3 font-semibold">Status</th>
+            <th className="px-4 py-3 font-semibold">Actions</th>
           </tr>
         </thead>
         <tbody>
           {supplyItems.map((item) => (
-            <tr key={item.id} className="border-t">
-              <td className="px-4 py-3 font-medium">{item.supply_name}</td>
-              <td className="px-4 py-3">{item.unit_type || '—'}</td>
+            <tr key={item.id} className="border-t border-white/10 hover:bg-white/[0.02]">
               <td className="px-4 py-3">
-                ${Number(item.default_cost ?? 0).toLocaleString()}
+                <div>
+                  <p className="font-medium text-white">{item.supply_name}</p>
+                  <p className="mt-1 text-xs text-slate-500">{item.notes || '—'}</p>
+                </div>
               </td>
+              <td className="px-4 py-3 text-slate-300">{item.unit_type || '—'}</td>
+              <td className="px-4 py-3 text-slate-300">{formatCurrency(item.default_cost)}</td>
               <td className="px-4 py-3">
                 <SupplyStatusBadge isActive={item.is_active} />
               </td>
@@ -57,7 +68,7 @@ export function SuppliesTable({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => onEdit(item)}
-                    className="rounded border px-3 py-1 text-xs"
+                    className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:bg-white/10 hover:text-white"
                   >
                     Edit
                   </button>
@@ -70,14 +81,10 @@ export function SuppliesTable({
                     }}
                   >
                     <input type="hidden" name="supplyItemId" value={item.id} />
-                    <input
-                      type="hidden"
-                      name="nextValue"
-                      value={String(!item.is_active)}
-                    />
+                    <input type="hidden" name="nextValue" value={String(!item.is_active)} />
                     <button
                       disabled={pending}
-                      className="rounded border px-3 py-1 text-xs"
+                      className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:bg-white/10 hover:text-white disabled:opacity-50"
                     >
                       {item.is_active ? 'Deactivate' : 'Activate'}
                     </button>

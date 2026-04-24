@@ -6,41 +6,54 @@ import { createClient } from '@/lib/supabase/server'
 function revalidateShowFilePaths(showId: string) {
   revalidatePath(`/shows/${showId}/notes`)
   revalidatePath(`/shows/${showId}`)
+  revalidatePath('/dashboard')
+}
+
+function cleanFileName(fileName: string) {
+  return fileName
+    .replace(/[^\w.\-() ]+/g, '')
+    .replace(/\s+/g, '-')
+    .slice(0, 140)
 }
 
 export async function uploadShowFile(formData: FormData) {
   const showId = String(formData.get('showId') || '').trim()
   const file = formData.get('file') as File | null
 
-  if (!showId || !file) {
-    throw new Error('Show and file are required.')
+  if (!showId) {
+    throw new Error('Show ID is required.')
+  }
+
+  if (!file || file.size === 0) {
+    throw new Error('File is required.')
   }
 
   const supabase = await createClient()
 
   const {
     data: { user },
+    error: userError,
   } = await supabase.auth.getUser()
 
-  if (!user) {
-    throw new Error('You must be logged in.')
+  if (userError || !user) {
+    throw new Error(userError?.message || 'You must be logged in.')
   }
 
-  const { data: profile, error: profileError } = await supabase
-    .from('profiles')
-    .select('id, organization_id')
-    .eq('id', user.id)
-    .single()
+  const { data: membership, error: membershipError } = await supabase
+    .from('organization_memberships')
+    .select('id, organization_id, profile_id')
+    .eq('profile_id', user.id)
+    .eq('status', 'active')
+    .maybeSingle()
 
-  if (profileError || !profile?.organization_id) {
-    throw new Error('Organization not found for this user.')
+  if (membershipError || !membership) {
+    throw new Error(membershipError?.message || 'Organization membership not found.')
   }
 
-  const bytes = await file.arrayBuffer()
-  const buffer = Buffer.from(bytes)
+  const safeName = cleanFileName(file.name)
+  const storagePath = `${membership.organization_id}/${showId}/${Date.now()}-${safeName}`
 
-  const safeName = file.name.replace(/\s+/g, '-')
-  const storagePath = `${profile.organization_id}/${showId}/${Date.now()}-${safeName}`
+  const buffer = Buffer.from(await file.arrayBuffer())
 
   const { error: uploadError } = await supabase.storage
     .from('show-files')
@@ -53,19 +66,19 @@ export async function uploadShowFile(formData: FormData) {
     throw new Error(uploadError.message)
   }
 
-  const { error: insertError } = await supabase
-    .from('show_files')
-    .insert({
-      organization_id: profile.organization_id,
-      show_id: showId,
-      file_name: file.name,
-      storage_path: storagePath,
-      mime_type: file.type || null,
-      file_size: file.size,
-      uploaded_by: profile.id,
-    })
+  const { error: insertError } = await supabase.from('show_files').insert({
+    organization_id: membership.organization_id,
+    show_id: showId,
+    file_name: file.name,
+    storage_path: storagePath,
+    mime_type: file.type || null,
+    file_size: file.size,
+    uploaded_by: membership.profile_id,
+    uploaded_by_membership_id: membership.id,
+  })
 
   if (insertError) {
+    await supabase.storage.from('show-files').remove([storagePath])
     throw new Error(insertError.message)
   }
 
@@ -73,13 +86,22 @@ export async function uploadShowFile(formData: FormData) {
 }
 
 export async function deleteShowFile(fileId: string, showId: string) {
+  if (!fileId) {
+    throw new Error('File ID is required.')
+  }
+
+  if (!showId) {
+    throw new Error('Show ID is required.')
+  }
+
   const supabase = await createClient()
 
   const { data: fileRow, error: fileError } = await supabase
     .from('show_files')
-    .select('storage_path')
+    .select('id, storage_path')
     .eq('id', fileId)
-    .single()
+    .eq('show_id', showId)
+    .maybeSingle()
 
   if (fileError || !fileRow) {
     throw new Error(fileError?.message || 'File not found.')
@@ -97,9 +119,32 @@ export async function deleteShowFile(fileId: string, showId: string) {
     .from('show_files')
     .delete()
     .eq('id', fileId)
+    .eq('show_id', showId)
 
   if (deleteError) {
     throw new Error(deleteError.message)
+  }
+
+  revalidateShowFilePaths(showId)
+}
+
+export async function updateShowNotes(showId: string, notes: string) {
+  if (!showId) {
+    throw new Error('Show ID is required.')
+  }
+
+  const supabase = await createClient()
+
+  const { error } = await supabase
+    .from('shows')
+    .update({
+      internal_notes: notes,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', showId)
+
+  if (error) {
+    throw new Error(error.message)
   }
 
   revalidateShowFilePaths(showId)

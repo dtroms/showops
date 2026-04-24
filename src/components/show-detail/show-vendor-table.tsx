@@ -38,40 +38,40 @@ export function ShowVendorTable({
 
   if (!vendors.length) {
     return (
-      <div className="rounded-2xl border border-dashed bg-white p-6 text-sm text-slate-500">
+      <div className="rounded-[24px] border border-dashed border-white/10 bg-white/[0.03] p-6 text-sm text-slate-500">
         No freelance labor assigned to this show yet.
       </div>
     )
   }
 
   return (
-    <div className="overflow-x-auto rounded-2xl border bg-white">
+    <div className="overflow-x-auto rounded-[24px] border border-white/10 bg-white/[0.03]">
       <table className="min-w-full text-left text-sm">
-        <thead className="bg-slate-50 text-slate-600">
+        <thead className="bg-white/[0.03] text-slate-500">
           <tr>
-            <th className="px-4 py-3">Vendor</th>
-            <th className="px-4 py-3">Type</th>
-            <th className="px-4 py-3">Service</th>
-            <th className="px-4 py-3">Contact</th>
-            <th className="px-4 py-3">Day Rate</th>
-            <th className="px-4 py-3">Conflict</th>
-            <th className="px-4 py-3 text-right">Actions</th>
+            <th className="px-4 py-3 font-semibold">Vendor</th>
+            <th className="px-4 py-3 font-semibold">Type</th>
+            <th className="px-4 py-3 font-semibold">Service</th>
+            <th className="px-4 py-3 font-semibold">Contact</th>
+            <th className="px-4 py-3 font-semibold">Day Rate</th>
+            <th className="px-4 py-3 font-semibold">Conflict</th>
+            <th className="px-4 py-3 text-right font-semibold">Actions</th>
           </tr>
         </thead>
         <tbody>
           {vendors.map((vendor) => (
-            <tr key={vendor.id} className="border-t align-top">
-              <td className="px-4 py-3 font-medium">{vendor.vendor_name_snapshot}</td>
-              <td className="px-4 py-3">{vendor.vendor_type_snapshot ?? '—'}</td>
-              <td className="px-4 py-3">{vendor.service_type_snapshot ?? '—'}</td>
+            <tr key={vendor.id} className="border-t border-white/10 align-top">
+              <td className="px-4 py-3 font-medium text-white">{vendor.vendor_name_snapshot}</td>
+              <td className="px-4 py-3 text-slate-300">{vendor.vendor_type_snapshot ?? '—'}</td>
+              <td className="px-4 py-3 text-slate-300">{vendor.service_type_snapshot ?? '—'}</td>
               <td className="px-4 py-3">
                 <div>
-                  <p>{vendor.contact_name_snapshot ?? '—'}</p>
+                  <p className="text-slate-300">{vendor.contact_name_snapshot ?? '—'}</p>
                   <p className="text-xs text-slate-500">{vendor.email_snapshot ?? '—'}</p>
                   <p className="text-xs text-slate-500">{vendor.phone_snapshot ?? '—'}</p>
                 </div>
               </td>
-              <td className="px-4 py-3">
+              <td className="px-4 py-3 text-slate-300">
                 {formatCurrency(vendor.default_day_rate_snapshot)}
               </td>
               <td className="px-4 py-3">
@@ -80,24 +80,24 @@ export function ShowVendorTable({
                     {vendor.conflicts.map((conflict) => (
                       <div
                         key={conflict.conflicting_show_id}
-                        className="rounded-lg border border-amber-200 bg-amber-50 p-2 text-xs text-amber-900"
+                        className="rounded-xl border border-amber-500/20 bg-amber-500/[0.08] p-3 text-xs text-amber-200"
                       >
-                        <p className="font-medium">
+                        <p className="font-medium text-amber-100">
                           {conflict.conflicting_show_name}
                           {conflict.conflicting_show_number
                             ? ` (${conflict.conflicting_show_number})`
                             : ''}
                         </p>
-                        <p>
+                        <p className="mt-1">
                           {formatShortDate(conflict.start_date)} →{' '}
                           {formatShortDate(conflict.end_date)}
                         </p>
-                        <p>Status: {conflict.status ?? '—'}</p>
+                        <p className="mt-1">Status: {conflict.status ?? '—'}</p>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <span className="text-sm text-emerald-600">No conflict</span>
+                  <span className="text-sm text-emerald-300">No conflict</span>
                 )}
               </td>
               <td className="px-4 py-3 text-right">
@@ -110,7 +110,7 @@ export function ShowVendorTable({
                       await removeVendorFromShow(vendor.id, showId)
                     })
                   }}
-                  className="rounded-lg border border-red-300 px-3 py-1.5 text-xs font-medium text-red-600 disabled:opacity-50"
+                  className="rounded-xl border border-rose-500/20 bg-rose-500/10 px-3 py-1.5 text-xs font-medium text-rose-300 disabled:opacity-50"
                 >
                   Remove
                 </button>

@@ -18,23 +18,37 @@ type Show = {
   total_estimated_cost: number | null
   projected_profit: number | null
   margin_percent: number | null
+  can_view_financials: boolean
 }
 
 function statusClasses(status: string | null) {
   switch (status) {
     case 'confirmed':
-      return 'bg-emerald-50 text-emerald-700 border-emerald-200'
+      return 'border-emerald-500/20 bg-emerald-500/15 text-emerald-300'
     case 'quoted':
-      return 'bg-blue-50 text-blue-700 border-blue-200'
+      return 'border-sky-500/20 bg-sky-500/15 text-sky-300'
     case 'in_progress':
-      return 'bg-amber-50 text-amber-700 border-amber-200'
+      return 'border-amber-500/20 bg-amber-500/15 text-amber-300'
     case 'completed':
-      return 'bg-violet-50 text-violet-700 border-violet-200'
+      return 'border-violet-500/20 bg-violet-500/15 text-violet-300'
     case 'archived':
-      return 'bg-slate-100 text-slate-600 border-slate-200'
+      return 'border-white/10 bg-white/10 text-slate-400'
     default:
-      return 'bg-slate-100 text-slate-700 border-slate-200'
+      return 'border-white/10 bg-white/10 text-slate-300'
   }
+}
+
+function financialValue(
+  show: Show,
+  key: 'estimated_revenue' | 'total_estimated_cost' | 'projected_profit'
+) {
+  if (!show.can_view_financials) return '—'
+  return formatCurrency(show[key])
+}
+
+function marginValue(show: Show) {
+  if (!show.can_view_financials) return '—'
+  return `${show.margin_percent ?? '—'}%`
 }
 
 export function AllShowsTable({ shows }: { shows: Show[] }) {
@@ -42,9 +56,9 @@ export function AllShowsTable({ shows }: { shows: Show[] }) {
 
   if (!shows.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center shadow-sm">
-        <p className="text-sm font-medium text-slate-600">No shows found.</p>
-        <p className="mt-1 text-sm text-slate-400">
+      <div className="rounded-[24px] border border-dashed border-white/10 bg-white/[0.03] p-10 text-center">
+        <p className="text-sm font-medium text-slate-300">No shows found.</p>
+        <p className="mt-1 text-sm text-slate-500">
           Try adjusting your filters or create a new show.
         </p>
       </div>
@@ -52,9 +66,9 @@ export function AllShowsTable({ shows }: { shows: Show[] }) {
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03]">
       <table className="w-full text-left text-sm">
-        <thead className="bg-slate-50 text-slate-600">
+        <thead className="bg-white/[0.03] text-slate-500">
           <tr>
             <th className="px-4 py-3 font-semibold">Show</th>
             <th className="px-4 py-3 font-semibold">Client</th>
@@ -74,110 +88,108 @@ export function AllShowsTable({ shows }: { shows: Show[] }) {
             const expanded = expandedShowId === show.show_id
 
             return (
-              <>
-                <tr
-                  key={show.show_id}
-                  className="border-t border-slate-200 hover:bg-slate-50/70"
-                >
-                  <td className="px-4 py-4">
-                    <p className="font-semibold text-slate-900">{show.show_name}</p>
-                    <div className="mt-2 flex items-center gap-2">
-                      <p className="text-xs text-slate-500">{show.show_number ?? '—'}</p>
-                      <span
-                        className={`inline-flex rounded-full border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${statusClasses(
-                          show.status
-                        )}`}
-                      >
-                        {show.status ?? 'draft'}
-                      </span>
-                    </div>
-                  </td>
+              <tr key={show.show_id} className="border-t border-white/10 hover:bg-white/[0.02]">
+                <td className="px-4 py-4">
+                  <p className="font-semibold text-white">{show.show_name}</p>
+                  <div className="mt-2 flex items-center gap-2">
+                    <p className="text-xs text-slate-500">{show.show_number ?? '—'}</p>
+                    <span
+                      className={`inline-flex rounded-full border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${statusClasses(
+                        show.status
+                      )}`}
+                    >
+                      {show.status ?? 'draft'}
+                    </span>
+                  </div>
+                </td>
 
-                  <td className="px-4 py-4">{show.client_name ?? '—'}</td>
-                  <td className="px-4 py-4">{show.venue_name ?? '—'}</td>
-                  <td className="px-4 py-4">{show.city ?? '—'}</td>
-                  <td className="px-4 py-4">
-                    {formatShortDate(show.start_date)} - {formatShortDate(show.end_date)}
-                  </td>
-                  <td className="px-4 py-4">{formatCurrency(show.estimated_revenue)}</td>
-                  <td className="px-4 py-4">{formatCurrency(show.total_estimated_cost)}</td>
-                  <td className="px-4 py-4 font-medium text-emerald-600">
-                    {formatCurrency(show.projected_profit)}
-                  </td>
-                  <td className="px-4 py-4">{show.margin_percent ?? '—'}%</td>
+                <td className="px-4 py-4 text-slate-300">{show.client_name ?? '—'}</td>
+                <td className="px-4 py-4 text-slate-300">{show.venue_name ?? '—'}</td>
+                <td className="px-4 py-4 text-slate-300">{show.city ?? '—'}</td>
+                <td className="px-4 py-4 text-slate-300">
+                  {formatShortDate(show.start_date)} - {formatShortDate(show.end_date)}
+                </td>
+                <td className="px-4 py-4 text-slate-300">{financialValue(show, 'estimated_revenue')}</td>
+                <td className="px-4 py-4 text-slate-300">{financialValue(show, 'total_estimated_cost')}</td>
+                <td className="px-4 py-4 font-medium text-emerald-300">
+                  {financialValue(show, 'projected_profit')}
+                </td>
+                <td className="px-4 py-4 text-slate-300">{marginValue(show)}</td>
 
-                  <td className="px-4 py-4">
-                    <div className="flex justify-end gap-2">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setExpandedShowId((current) =>
-                            current === show.show_id ? null : show.show_id
-                          )
-                        }
-                        className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:bg-slate-100"
-                      >
-                        {expanded ? 'Hide Details' : 'View Details'}
-                      </button>
+                <td className="px-4 py-4">
+                  <div className="flex justify-end gap-2">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setExpandedShowId((current) =>
+                          current === show.show_id ? null : show.show_id
+                        )
+                      }
+                      className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:bg-white/10 hover:text-white"
+                    >
+                      {expanded ? 'Hide Details' : 'View Details'}
+                    </button>
 
-                      <Link
-                        href={`/shows/${show.show_id}/budget-summary`}
-                        className="rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-slate-800"
-                      >
-                        View Show Summary
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-
-                {expanded ? (
-                  <tr className="border-t border-slate-200 bg-slate-50/70">
-                    <td colSpan={10} className="px-4 py-4">
-                      <div className="grid gap-4 md:grid-cols-4">
-                        <div className="rounded-xl border border-slate-200 bg-white p-4">
-                          <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
-                            Revenue
-                          </p>
-                          <p className="mt-2 text-lg font-semibold">
-                            {formatCurrency(show.estimated_revenue)}
-                          </p>
-                        </div>
-
-                        <div className="rounded-xl border border-slate-200 bg-white p-4">
-                          <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
-                            Cost
-                          </p>
-                          <p className="mt-2 text-lg font-semibold">
-                            {formatCurrency(show.total_estimated_cost)}
-                          </p>
-                        </div>
-
-                        <div className="rounded-xl border border-slate-200 bg-white p-4">
-                          <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
-                            Profit
-                          </p>
-                          <p className="mt-2 text-lg font-semibold text-emerald-600">
-                            {formatCurrency(show.projected_profit)}
-                          </p>
-                        </div>
-
-                        <div className="rounded-xl border border-slate-200 bg-white p-4">
-                          <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
-                            Margin
-                          </p>
-                          <p className="mt-2 text-lg font-semibold">
-                            {show.margin_percent ?? '—'}%
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                ) : null}
-              </>
+                    <Link
+                      href={`/shows/${show.show_id}/show-details`}
+                      className="rounded-xl bg-white px-3 py-1.5 text-xs font-medium text-slate-950 transition hover:bg-slate-100"
+                    >
+                      Open Show
+                    </Link>
+                  </div>
+                </td>
+              </tr>
             )
           })}
         </tbody>
       </table>
+
+      {shows.map((show) => {
+        const expanded = expandedShowId === show.show_id
+        if (!expanded) return null
+
+        return (
+          <div key={`${show.show_id}-expanded`} className="border-t border-white/10 bg-white/[0.02] px-4 py-4">
+            <div className="grid gap-4 md:grid-cols-4">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                  Revenue
+                </p>
+                <p className="mt-2 text-lg font-semibold text-white">
+                  {financialValue(show, 'estimated_revenue')}
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                  Cost
+                </p>
+                <p className="mt-2 text-lg font-semibold text-white">
+                  {financialValue(show, 'total_estimated_cost')}
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                  Profit
+                </p>
+                <p className="mt-2 text-lg font-semibold text-emerald-300">
+                  {financialValue(show, 'projected_profit')}
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                  Margin
+                </p>
+                <p className="mt-2 text-lg font-semibold text-white">
+                  {marginValue(show)}
+                </p>
+              </div>
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

@@ -24,8 +24,6 @@ function getRangeLabel(range: Range) {
       return 'Past Quarter'
     case 'year':
       return 'Past Year'
-    default:
-      return ''
   }
 }
 
@@ -63,57 +61,52 @@ export function DashboardFilteredChart({
   const maxValue = Math.max(revenue, cost, profit, 1)
 
   return (
-    <div className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${compact ? 'p-4' : 'p-6'}`}>
+    <div className={`rounded-[28px] border border-white/10 bg-white/[0.03] ${compact ? 'p-4' : 'p-6'}`}>
       <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className={`${compact ? 'text-lg' : 'text-xl'} font-semibold tracking-tight`}>
+          <h2 className={`${compact ? 'text-lg' : 'text-xl'} font-semibold tracking-tight text-white`}>
             Profit vs Expense
           </h2>
-          <p className="mt-1 text-sm text-slate-500">{getRangeLabel(range)}</p>
+          <p className="mt-1 text-sm text-slate-400">{getRangeLabel(range)}</p>
         </div>
 
         <select
           value={range}
           onChange={(e) => onRangeChange(e.target.value as Range)}
-          className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white"
         >
-          <option value="week">Past Week</option>
-          <option value="month">Past Month</option>
-          <option value="quarter">Past Quarter</option>
-          <option value="year">Past Year</option>
+          <option value="week" className="bg-slate-900 text-white">Past Week</option>
+          <option value="month" className="bg-slate-900 text-white">Past Month</option>
+          <option value="quarter" className="bg-slate-900 text-white">Past Quarter</option>
+          <option value="year" className="bg-slate-900 text-white">Past Year</option>
         </select>
       </div>
 
       <div className="space-y-4">
         {[
-          { label: 'Revenue', value: revenue, tone: 'bg-slate-900' },
+          { label: 'Revenue', value: revenue, tone: 'bg-white' },
           { label: 'Cost', value: cost, tone: 'bg-slate-400' },
           { label: 'Profit', value: profit, tone: 'bg-emerald-500' },
         ].map((item) => (
           <div key={item.label}>
             <div className="mb-2 flex items-center justify-between text-sm">
-              <span className="font-medium text-slate-700">{item.label}</span>
-              <span className="text-slate-500">{formatCurrency(item.value)}</span>
+              <span className="font-medium text-slate-300">{item.label}</span>
+              <span className="text-slate-400">{formatCurrency(item.value)}</span>
             </div>
-            <div className="h-3 rounded-full bg-slate-100">
-              <div
-                className={`h-3 rounded-full ${item.tone}`}
-                style={{ width: `${(item.value / maxValue) * 100}%` }}
-              />
+            <div className="h-3 rounded-full bg-white/5">
+              <div className={`h-3 rounded-full ${item.tone}`} style={{ width: `${(item.value / maxValue) * 100}%` }} />
             </div>
           </div>
         ))}
       </div>
 
       {!compact && filtered.length ? (
-        <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Included Shows
-          </p>
+        <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Included Shows</p>
           <div className="mt-3 space-y-2">
             {filtered.slice(0, 5).map((show) => (
               <div key={show.show_id} className="flex items-center justify-between text-sm">
-                <span className="font-medium text-slate-800">{show.show_name}</span>
+                <span className="font-medium text-white">{show.show_name}</span>
                 <span className="text-slate-500">{formatShortDate(show.start_date)}</span>
               </div>
             ))}

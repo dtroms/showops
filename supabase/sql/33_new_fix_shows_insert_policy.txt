@@ -1,0 +1,31 @@
+drop policy if exists shows_insert_phase1 on public.shows;
+drop policy if exists shows_insert_phase2 on public.shows;
+drop policy if exists shows_insert on public.shows;
+
+create policy shows_insert
+on public.shows
+for insert
+to authenticated
+with check (
+  exists (
+    select 1
+    from public.organization_memberships om
+    where om.id = shows.created_by_membership_id
+      and om.user_id = auth.uid()
+      and om.organization_id = shows.organization_id
+      and om.status = 'active'
+      and om.role = any (
+        array['owner'::text, 'org_admin'::text, 'ops_manager'::text, 'project_manager'::text]
+      )
+  )
+  and (
+    shows.lead_membership_id is null
+    or exists (
+      select 1
+      from public.organization_memberships om
+      where om.id = shows.lead_membership_id
+        and om.organization_id = shows.organization_id
+        and om.status = 'active'
+    )
+  )
+);

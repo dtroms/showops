@@ -2,36 +2,27 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { requireMembershipContext } from '@/lib/auth-context'
+import { isOrgAdminRole } from '@/lib/permissions'
 
 export type GearState = {
   error?: string
   success?: boolean
 }
 
+function canEditGear(role: string | null | undefined) {
+  return isOrgAdminRole(role as any) || role === 'warehouse_admin'
+}
+
 async function getGearEditorContext() {
   const supabase = await createClient()
+  const ctx = await requireMembershipContext()
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) throw new Error('Unauthorized')
-
-  const { data: profile, error } = await supabase
-    .from('profiles')
-    .select('organization_id, role')
-    .eq('id', user.id)
-    .single()
-
-  if (error || !profile?.organization_id) {
-    throw new Error('Workspace profile not found')
-  }
-
-  if (!['admin', 'editor'].includes(profile.role)) {
+  if (!canEditGear(ctx.orgRole)) {
     throw new Error('You do not have permission to modify gear')
   }
 
-  return { supabase, profile }
+  return { supabase, organizationId: ctx.organizationId }
 }
 
 function revalidateGearPaths() {
@@ -43,7 +34,7 @@ export async function createGearItem(
   formData: FormData
 ): Promise<GearState> {
   try {
-    const { supabase, profile } = await getGearEditorContext()
+    const { supabase, organizationId } = await getGearEditorContext()
 
     const itemName = String(formData.get('itemName') || '').trim()
     const categoryName = String(formData.get('categoryName') || '').trim()
@@ -65,7 +56,7 @@ export async function createGearItem(
     const { data: existingCategory } = await supabase
       .from('gear_categories')
       .select('id')
-      .eq('organization_id', profile.organization_id)
+      .eq('organization_id', organizationId)
       .eq('name', categoryName)
       .maybeSingle()
 
@@ -75,7 +66,7 @@ export async function createGearItem(
       const { data: newCategory, error: categoryError } = await supabase
         .from('gear_categories')
         .insert({
-          organization_id: profile.organization_id,
+          organization_id: organizationId,
           name: categoryName,
           is_active: true,
         })
@@ -95,7 +86,7 @@ export async function createGearItem(
       const { data: existingSubcategory } = await supabase
         .from('gear_subcategories')
         .select('id')
-        .eq('organization_id', profile.organization_id)
+        .eq('organization_id', organizationId)
         .eq('category_id', categoryId)
         .eq('name', subcategoryName)
         .maybeSingle()
@@ -106,7 +97,7 @@ export async function createGearItem(
         const { data: newSubcategory, error: subcategoryError } = await supabase
           .from('gear_subcategories')
           .insert({
-            organization_id: profile.organization_id,
+            organization_id: organizationId,
             category_id: categoryId,
             name: subcategoryName,
             is_active: true,
@@ -125,7 +116,7 @@ export async function createGearItem(
     }
 
     const { error } = await supabase.from('gear_items').insert({
-      organization_id: profile.organization_id,
+      organization_id: organizationId,
       item_name: itemName,
       category_id: categoryId,
       subcategory_id: subcategoryId,
@@ -150,7 +141,7 @@ export async function updateGearItem(
   formData: FormData
 ): Promise<GearState> {
   try {
-    const { supabase, profile } = await getGearEditorContext()
+    const { supabase, organizationId } = await getGearEditorContext()
 
     const gearItemId = String(formData.get('gearItemId') || '').trim()
     const itemName = String(formData.get('itemName') || '').trim()
@@ -173,7 +164,7 @@ export async function updateGearItem(
     const { data: existingCategory } = await supabase
       .from('gear_categories')
       .select('id')
-      .eq('organization_id', profile.organization_id)
+      .eq('organization_id', organizationId)
       .eq('name', categoryName)
       .maybeSingle()
 
@@ -183,7 +174,7 @@ export async function updateGearItem(
       const { data: newCategory, error: categoryError } = await supabase
         .from('gear_categories')
         .insert({
-          organization_id: profile.organization_id,
+          organization_id: organizationId,
           name: categoryName,
           is_active: true,
         })
@@ -203,7 +194,7 @@ export async function updateGearItem(
       const { data: existingSubcategory } = await supabase
         .from('gear_subcategories')
         .select('id')
-        .eq('organization_id', profile.organization_id)
+        .eq('organization_id', organizationId)
         .eq('category_id', categoryId)
         .eq('name', subcategoryName)
         .maybeSingle()
@@ -214,7 +205,7 @@ export async function updateGearItem(
         const { data: newSubcategory, error: subcategoryError } = await supabase
           .from('gear_subcategories')
           .insert({
-            organization_id: profile.organization_id,
+            organization_id: organizationId,
             category_id: categoryId,
             name: subcategoryName,
             is_active: true,
@@ -242,7 +233,7 @@ export async function updateGearItem(
         notes,
       })
       .eq('id', gearItemId)
-      .eq('organization_id', profile.organization_id)
+      .eq('organization_id', organizationId)
 
     if (error) return { error: error.message }
 
@@ -256,7 +247,7 @@ export async function updateGearItem(
 }
 
 export async function toggleGearItemActive(formData: FormData) {
-  const { supabase, profile } = await getGearEditorContext()
+  const { supabase, organizationId } = await getGearEditorContext()
 
   const gearItemId = String(formData.get('gearItemId') || '').trim()
   const nextValue = String(formData.get('nextValue') || '').trim() === 'true'
@@ -267,7 +258,7 @@ export async function toggleGearItemActive(formData: FormData) {
     .from('gear_items')
     .update({ is_active: nextValue })
     .eq('id', gearItemId)
-    .eq('organization_id', profile.organization_id)
+    .eq('organization_id', organizationId)
 
   if (error) throw new Error(error.message)
 

@@ -1,0 +1,5 @@
+alter table public.show_files
+add column if not exists uploaded_by_membership_id uuid references public.organization_memberships(id) on delete set null;
+
+create index if not exists show_files_uploaded_by_membership_id_idx
+on public.show_files(uploaded_by_membership_id);

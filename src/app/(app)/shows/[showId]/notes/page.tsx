@@ -25,17 +25,9 @@ export default async function ShowNotesPage({
         .order('created_at', { ascending: false }),
     ])
 
-  if (showError) {
-    throw new Error(showError.message)
-  }
-
-  if (filesError) {
-    throw new Error(filesError.message)
-  }
-
-  if (!show) {
-    notFound()
-  }
+  if (showError) throw new Error(showError.message)
+  if (filesError) throw new Error(filesError.message)
+  if (!show) notFound()
 
   const filesWithUrls = await Promise.all(
     (files ?? []).map(async (file) => {

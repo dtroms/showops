@@ -1,0 +1,196 @@
+"filename", "language", "MS SQL", "TypeScript", "TypeScript JSX", "PostCSS", "comment", "blank", "total"
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\audit\page.tsx", "TypeScript JSX", 0, 0, -48, 0, 0, -9, -57
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\dashboard\page.tsx", "TypeScript JSX", 0, 0, -311, 0, 0, -52, -363
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\gear\page.tsx", "TypeScript JSX", 0, 0, -34, 0, 0, -5, -39
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\layout.tsx", "TypeScript JSX", 0, 0, -120, 0, 0, -21, -141
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\profile\page.tsx", "TypeScript JSX", 0, 0, -33, 0, 0, -5, -38
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\reports\page.tsx", "TypeScript JSX", 0, 0, -30, 0, -2, -5, -37
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\billing\page.tsx", "TypeScript JSX", 0, 0, -118, 0, 0, -12, -130
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\budget-targets\page.tsx", "TypeScript JSX", 0, 0, -236, 0, 0, -28, -264
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\profile\page.tsx", "TypeScript JSX", 0, 0, -33, 0, 0, -5, -38
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\team\page.tsx", "TypeScript JSX", 0, 0, -30, 0, 0, -5, -35
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\settings\users\page.tsx", "TypeScript JSX", 0, 0, -14, 0, 0, -2, -16
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\budget-comparison\page.tsx", "TypeScript JSX", 0, 0, -487, 0, 0, -63, -550
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\budget-export\route.ts", "TypeScript", 0, -13, 0, 0, 0, -3, -16
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\budget-sheet\page.tsx", "TypeScript JSX", 0, 0, -501, 0, 0, -72, -573
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\budget-summary\page.tsx", "TypeScript JSX", 0, 0, -361, 0, 0, -33, -394
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\layout.tsx", "TypeScript JSX", 0, 0, -72, 0, 0, -8, -80
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\nearby-partners\page.tsx", "TypeScript JSX", 0, 0, -9, 0, 0, -1, -10
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\notes\page.tsx", "TypeScript JSX", 0, 0, -51, 0, 0, -9, -60
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\page.tsx", "TypeScript JSX", 0, 0, -9, 0, 0, -1, -10
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\show-details\page.tsx", "TypeScript JSX", 0, 0, -240, 0, 0, -25, -265
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\supplies\page.tsx", "TypeScript JSX", 0, 0, -94, 0, 0, -9, -103
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\team\page.tsx", "TypeScript JSX", 0, 0, -243, 0, 0, -28, -271
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\travel\page.tsx", "TypeScript JSX", 0, 0, -94, 0, 0, -9, -103
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\[showId]\vendors\page.tsx", "TypeScript JSX", 0, 0, -435, 0, 0, -61, -496
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\new\page.tsx", "TypeScript JSX", 0, 0, -78, 0, 0, -11, -89
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\shows\page.tsx", "TypeScript JSX", 0, 0, -156, 0, 0, -24, -180
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\supplies\page.tsx", "TypeScript JSX", 0, 0, -20, 0, 0, -4, -24
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\team\page.tsx", "TypeScript JSX", 0, 0, -4, 0, 0, -1, -5
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\business\[vendorId]\page.tsx", "TypeScript JSX", 0, 0, -70, 0, 0, -6, -76
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\business\new\page.tsx", "TypeScript JSX", 0, 0, -8, 0, 0, -1, -9
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\business\page.tsx", "TypeScript JSX", 0, 0, -71, 0, 0, -6, -77
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\freelance\[vendorId]\page.tsx", "TypeScript JSX", 0, 0, -78, 0, 0, -8, -86
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\freelance\new\page.tsx", "TypeScript JSX", 0, 0, -8, 0, 0, -1, -9
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\freelance\page.tsx", "TypeScript JSX", 0, 0, -97, 0, 0, -13, -110
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\vendors\page.tsx", "TypeScript JSX", 0, 0, -4, 0, 0, -1, -5
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\venues\page.tsx", "TypeScript JSX", 0, 0, -25, 0, 0, -4, -29
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(app)\venues\venues.ts", "TypeScript", 0, -147, 0, 0, 0, -29, -176
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(auth)\login\page.tsx", "TypeScript JSX", 0, 0, -55, 0, 0, -11, -66
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(auth)\signup\page.tsx", "TypeScript JSX", 0, 0, -56, 0, 0, -11, -67
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(platform-admin)\admin\layout.tsx", "TypeScript JSX", 0, 0, -55, 0, 0, -12, -67
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(platform-admin)\admin\organizations\[organizationId]\page.tsx", "TypeScript JSX", 0, 0, -9, 0, 0, -1, -10
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(platform-admin)\admin\organizations\page.tsx", "TypeScript JSX", 0, 0, -47, 0, 0, -9, -56
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\(platform-admin)\admin\page.tsx", "TypeScript JSX", 0, 0, -71, 0, 0, -9, -80
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\accept-invite.ts", "TypeScript", 0, -141, 0, 0, -1, -29, -171
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\audit-logs.ts", "TypeScript", 0, -101, 0, 0, 0, -18, -119
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\auth.ts", "TypeScript", 0, -69, 0, 0, 0, -20, -89
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\budget-lines.ts", "TypeScript", 0, -685, 0, 0, 0, -106, -791
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\budget-targets.ts", "TypeScript", 0, -91, 0, 0, 0, -24, -115
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\budget-versions.ts", "TypeScript", 0, -719, 0, 0, -15, -100, -834
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\freelancer-ratings.ts", "TypeScript", 0, -102, 0, 0, 0, -23, -125
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\gear.ts", "TypeScript", 0, -219, 0, 0, 0, -47, -266
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\invitations.ts", "TypeScript", 0, -218, 0, 0, -1, -46, -265
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\nearby-partners.ts", "TypeScript", 0, -261, 0, 0, 0, -47, -308
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\organization-financial-settings.ts", "TypeScript", 0, -55, 0, 0, 0, -16, -71
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\platform-admin-polish.ts", "TypeScript", 0, -22, 0, 0, -2, -7, -31
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\platform-admin.ts", "TypeScript", 0, -276, 0, 0, -3, -62, -341
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\platform-support.ts", "TypeScript", 0, -98, 0, 0, 0, -24, -122
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\profile-settings.ts", "TypeScript", 0, -56, 0, 0, 0, -13, -69
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\setup.ts", "TypeScript", 0, -31, 0, 0, 0, -10, -41
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\show-files.ts", "TypeScript", 0, -82, 0, 0, 0, -24, -106
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\show-memberships.ts", "TypeScript", 0, -561, 0, 0, 0, -81, -642
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\show-vendors.ts", "TypeScript", 0, -458, 0, 0, 0, -73, -531
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\shows.ts", "TypeScript", 0, -560, 0, 0, 0, -86, -646
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\supplies.ts", "TypeScript", 0, -107, 0, 0, 0, -29, -136
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\team-structure.ts", "TypeScript", 0, -126, 0, 0, 0, -26, -152
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\users.ts", "TypeScript", 0, -698, 0, 0, -1, -121, -820
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\vendor-service-area-editor.tsx", "TypeScript JSX", 0, 0, -288, 0, 0, -35, -323
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\vendor-service-areas.ts", "TypeScript", 0, -214, 0, 0, 0, -41, -255
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\vendors.ts", "TypeScript", 0, -362, 0, 0, 0, -62, -424
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\actions\venues.ts", "TypeScript", 0, -142, 0, 0, 0, -26, -168
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\show-vendor-conflicts\route.ts", "TypeScript", 0, -37, 0, 0, 0, -8, -45
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\shows\[showId]\budget-export\route.ts", "TypeScript", 0, -515, 0, 0, 0, -70, -585
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\stripe\checkout\route.ts", "TypeScript", 0, -54, 0, 0, 0, -11, -65
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\stripe\portal\route.ts", "TypeScript", 0, -32, 0, 0, 0, -6, -38
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\api\stripe\webhook\route.ts", "TypeScript", 0, -7, 0, 0, 0, -1, -8
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\finish-setup\page.tsx", "TypeScript JSX", 0, 0, -51, 0, 0, -10, -61
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\globals.css", "PostCSS", 0, 0, 0, -1, 0, 0, -1
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\invite\page.tsx", "TypeScript JSX", 0, 0, -36, 0, 0, -8, -44
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\layout.tsx", "TypeScript JSX", 0, 0, -12, 0, 0, 0, -12
+"c:\Users\Dale\Desktop\clean-signal-saas\src\app\page.tsx", "TypeScript JSX", 0, 0, -4, 0, 0, -1, -5
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\app-shell.tsx", "TypeScript JSX", 0, 0, -139, 0, 0, -24, -163
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\audit\audit-log-table.tsx", "TypeScript JSX", 0, 0, -304, 0, 0, -40, -344
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\auth\accept-invite-form.tsx", "TypeScript JSX", 0, 0, -108, 0, 0, -16, -124
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\budget\freelancer-rating-modal.tsx", "TypeScript JSX", 0, 0, -120, 0, 0, -19, -139
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-chart-filter.tsx", "TypeScript JSX", 0, 0, -31, 0, 0, -2, -33
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-expanded-row.tsx", "TypeScript JSX", 0, 0, -43, 0, 0, -5, -48
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-filtered-chart.tsx", "TypeScript JSX", 0, 0, -112, 0, 0, -13, -125
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-shell.tsx", "TypeScript JSX", 0, 0, -91, 0, 0, -13, -104
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-show-row.tsx", "TypeScript JSX", 0, 0, -51, 0, 0, -5, -56
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\dashboard-show-table.tsx", "TypeScript JSX", 0, 0, -158, 0, 0, -14, -172
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\leadership-dashboard-shell.tsx", "TypeScript JSX", 0, 0, -199, 0, 0, -24, -223
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\leadership-pm-group.tsx", "TypeScript JSX", 0, 0, -139, 0, 0, -19, -158
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\dashboard\quarterly-profit-breakdown.tsx", "TypeScript JSX", 0, 0, -199, 0, 0, -26, -225
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-filter-bar.tsx", "TypeScript JSX", 0, 0, -52, 0, 0, -3, -55
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-form-modal.tsx", "TypeScript JSX", 0, 0, -106, 0, 0, -15, -121
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-page-shell.tsx", "TypeScript JSX", 0, 0, -83, 0, 0, -14, -97
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-status-badge.tsx", "TypeScript JSX", 0, 0, -11, 0, 0, 0, -11
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\gear\gear-table.tsx", "TypeScript JSX", 0, 0, -90, 0, 0, -6, -96
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supplies-filter-bar.tsx", "TypeScript JSX", 0, 0, -34, 0, 0, -2, -36
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supplies-page-shell.tsx", "TypeScript JSX", 0, 0, -68, 0, 0, -12, -80
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supplies-table.tsx", "TypeScript JSX", 0, 0, -87, 0, 0, -6, -93
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supply-form-modal.tsx", "TypeScript JSX", 0, 0, -99, 0, 0, -14, -113
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\supplies\supply-status-badge.tsx", "TypeScript JSX", 0, 0, -11, 0, 0, 0, -11
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-filter-bar.tsx", "TypeScript JSX", 0, 0, -49, 0, 0, -4, -53
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-form-modal.tsx", "TypeScript JSX", 0, 0, -152, 0, 0, -19, -171
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-page-shell.tsx", "TypeScript JSX", 0, 0, -78, 0, 0, -11, -89
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-status-badge.tsx", "TypeScript JSX", 0, 0, -11, 0, 0, 0, -11
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\vendors\vendor-table.tsx", "TypeScript JSX", 0, 0, -102, 0, 0, -6, -108
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venue-form-modal.tsx", "TypeScript JSX", 0, 0, -149, 0, 0, -21, -170
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venue-status-badge.tsx", "TypeScript JSX", 0, 0, -13, 0, 0, 0, -13
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venues-filter-bar.tsx", "TypeScript JSX", 0, 0, -35, 0, 0, -3, -38
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venues-page-shell.tsx", "TypeScript JSX", 0, 0, -77, 0, 0, -13, -90
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\master-data\venues\venues-table.tsx", "TypeScript JSX", 0, 0, -115, 0, 0, -10, -125
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\platform-admin\admin-organizations-page-shell.tsx", "TypeScript JSX", 0, 0, -303, 0, 0, -48, -351
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\settings\organization-users-page-shell.tsx", "TypeScript JSX", 0, 0, -510, 0, 0, -57, -567
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\settings\profile-settings-form.tsx", "TypeScript JSX", 0, 0, -82, 0, 0, -13, -95
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\settings\team-invite-panel.tsx", "TypeScript JSX", 0, 0, -179, 0, 0, -20, -199
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\settings\team-structure-panel.tsx", "TypeScript JSX", 0, 0, -112, 0, 0, -13, -125
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\023_fix_show_memberships_assignment_type.sql", "MS SQL", -21, 0, 0, 0, 0, -6, -27
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\add-line-item-modal.tsx", "TypeScript JSX", 0, 0, -389, 0, 0, -36, -425
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\budget-line-form-vendor.tsx", "TypeScript JSX", 0, 0, -276, 0, 0, -29, -305
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\budget-sheet-section.tsx", "TypeScript JSX", 0, 0, -184, 0, 0, -24, -208
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\budget-sheet-table.tsx", "TypeScript JSX", 0, 0, -166, 0, 0, -24, -190
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\budget-summary-card.tsx", "TypeScript JSX", 0, 0, -30, 0, 0, -6, -36
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\edit-line-item-modal.tsx", "TypeScript JSX", 0, 0, -355, 0, 0, -30, -385
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\gear-budget-section.tsx", "TypeScript JSX", 0, 0, -137, 0, 0, -18, -155
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\nearby-partners-panel.tsx", "TypeScript JSX", 0, 0, -317, 0, 0, -31, -348
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-details-form.tsx", "TypeScript JSX", 0, 0, -203, 0, 0, -23, -226
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-header.tsx", "TypeScript JSX", 0, 0, -111, 0, 0, -12, -123
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-notes-panel.tsx", "TypeScript JSX", 0, 0, -176, 0, 0, -17, -193
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-shell.tsx", "TypeScript JSX", 0, 0, -65, 0, 0, -10, -75
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-side-nav.tsx", "TypeScript JSX", 0, 0, -47, 0, 0, -3, -50
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-team-page-shell.tsx", "TypeScript JSX", 0, 0, -305, 0, 0, -41, -346
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-vendor-form.tsx", "TypeScript JSX", 0, 0, -56, 0, 0, -12, -68
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-vendor-table.tsx", "TypeScript JSX", 0, 0, -118, 0, 0, -6, -124
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\show-vendors-page-shell.tsx", "TypeScript JSX", 0, 0, -521, 0, 0, -46, -567
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\sticky-budget-summary.tsx", "TypeScript JSX", 0, 0, -96, 0, 0, -10, -106
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\vendor-budget-add-back.tsx", "TypeScript JSX", 0, 0, -59, 0, 0, -8, -67
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\show-detail\vendor-search-select.tsx", "TypeScript JSX", 0, 0, -82, 0, 0, -11, -93
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\all-shows-filter-bar.tsx", "TypeScript JSX", 0, 0, -83, 0, 0, -8, -91
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\all-shows-page-shell.tsx", "TypeScript JSX", 0, 0, -77, 0, 0, -10, -87
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\all-shows-sort-select.tsx", "TypeScript JSX", 0, 0, -23, 0, 0, -1, -24
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\all-shows-table.tsx", "TypeScript JSX", 0, 0, -174, 0, 0, -18, -192
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\new-show-form.tsx", "TypeScript JSX", 0, 0, -125, 0, 0, -17, -142
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\shows\venue-select-fields.tsx", "TypeScript JSX", 0, 0, -215, 0, 0, -27, -242
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\trial-banner.tsx", "TypeScript JSX", 0, 0, -17, 0, 0, -1, -18
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\freelancer-profile-form.tsx", "TypeScript JSX", 0, 0, -247, 0, 0, -30, -277
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\shared\coverage-and-travel-section.tsx", "TypeScript JSX", 0, 0, -57, 0, 0, -5, -62
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\shared\primary-service-area-section.tsx", "TypeScript JSX", 0, 0, -106, 0, 0, -9, -115
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\vendor-form-modal.tsx", "TypeScript JSX", 0, 0, -362, 0, 0, -40, -402
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\vendor-partner-profile-form.tsx", "TypeScript JSX", 0, 0, -381, 0, 0, -43, -424
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\vendor-partners-page-shell.tsx", "TypeScript JSX", 0, 0, -288, 0, 0, -34, -322
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\vendors\vendor-service-area-editor.tsx", "TypeScript JSX", 0, 0, -182, 0, 0, -23, -205
+"c:\Users\Dale\Desktop\clean-signal-saas\src\components\venues\venues-page-shell.tsx", "TypeScript JSX", 0, 0, -77, 0, 0, -13, -90
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\audit.ts", "TypeScript", 0, -209, 0, 0, -4, -18, -231
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\auth-context.ts", "TypeScript", 0, -218, 0, 0, -35, -41, -294
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\format.ts", "TypeScript", 0, -13, 0, 0, 0, -3, -16
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\permissions.ts", "TypeScript", 0, -386, 0, 0, 0, -90, -476
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\show-access.ts", "TypeScript", 0, -86, 0, 0, 0, -14, -100
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\stripe.ts", "TypeScript", 0, -2, 0, 0, 0, -2, -4
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\supabase\admin.ts", "TypeScript", 0, -17, 0, 0, 0, -4, -21
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\supabase\client.ts", "TypeScript", 0, -7, 0, 0, 0, -1, -8
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\supabase\middleware.ts", "TypeScript", 0, -26, 0, 0, 0, -4, -30
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\supabase\server.ts", "TypeScript", 0, -23, 0, 0, 0, -2, -25
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\team-scope.ts", "TypeScript", 0, -84, 0, 0, 0, -18, -102
+"c:\Users\Dale\Desktop\clean-signal-saas\src\lib\user-display.ts", "TypeScript", 0, -62, 0, 0, 0, -13, -75
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\001_schema.sql", "MS SQL", 178, 0, 0, 0, 0, 24, 202
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\002_rls.sql", "MS SQL", 121, 0, 0, 0, 0, 16, 137
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\003_views.sql", "MS SQL", 100, 0, 0, 0, 0, 2, 102
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\004_rpc.sql", "MS SQL", 78, 0, 0, 0, 0, 7, 85
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\005_budget_versions_w2_labor.sql", "MS SQL", 402, 0, 0, 0, 42, 86, 530
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\007_budget_targets.sql", "MS SQL", 55, 0, 0, 0, 0, 7, 62
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\009_venue_repository.sql", "MS SQL", 8, 0, 0, 0, 0, 1, 9
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\010_vendor_service_areas.sql", "MS SQL", 85, 0, 0, 0, 24, 42, 151
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\011_vendor_nationwide_coverage.sql", "MS SQL", 6, 0, 0, 0, 0, 3, 9
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\012_show_vendors_rls.sql", "MS SQL", 91, 0, 0, 0, 0, 7, 98
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\013_vendor_service_areas_rls.sql", "MS SQL", 72, 0, 0, 0, 0, 6, 78
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\014_show_vendors_org_alignment.sql", "MS SQL", 6, 0, 0, 0, 0, 3, 9
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\015_vendor_rating.sql", "MS SQL", 4, 0, 0, 0, 0, 2, 6
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\016_freelancer_ratings.sql", "MS SQL", 36, 0, 0, 0, 0, 9, 45
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\017_freelancer_ratings_rls.sql", "MS SQL", 75, 0, 0, 0, 0, 6, 81
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\018_phase2_access_foundation.sql", "MS SQL", 535, 0, 0, 0, 89, 159, 783
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\019_phase2_access_helpers_and_rls.sql", "MS SQL", 869, 0, 0, 0, 64, 138, 1071
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\020_organizations_and_memberships.sql", "MS SQL", 55, 0, 0, 0, 9, 16, 80
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\020_phase2_audit_insert_policy.sql", "MS SQL", 69, 0, 0, 0, 31, 17, 117
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\021_fix_audit_logs_show_fk.sql", "MS SQL", 21, 0, 0, 0, 7, 4, 32
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\021_permission_helpers.sql", "MS SQL", 128, 0, 0, 0, 24, 34, 186
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\022_user_invitations.sql", "MS SQL", 195, 0, 0, 0, 27, 39, 261
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\023_add_profile_name_fields.sql", "MS SQL", 90, 0, 0, 0, 0, 12, 102
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\024_invite_system.sql", "MS SQL", 68, 0, 0, 0, 0, 10, 78
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\025_add_platform_role.sql", "MS SQL", 4, 0, 0, 0, 0, 0, 4
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\026_fix_shows_insert_policy.sql", "MS SQL", 30, 0, 0, 0, 0, 3, 33
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\027_reset_shows_rls.sql", "MS SQL", 101, 0, 0, 0, 0, 9, 110
+"c:\Users\Dale\Desktop\clean-signal-saas\supabase\sql\functions\get_vendor_conflicts_for_show.sql", "MS SQL", 39, 0, 0, 0, 0, 1, 40
+"Total", "-", 3500, -8392, -15315, -1, 253, -2703, -22658

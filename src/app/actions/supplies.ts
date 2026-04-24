@@ -2,36 +2,27 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { requireMembershipContext } from '@/lib/auth-context'
+import { isOrgAdminRole } from '@/lib/permissions'
 
 export type SupplyState = {
   error?: string
   success?: boolean
 }
 
+function canEditSupplies(role: string | null | undefined) {
+  return isOrgAdminRole(role as any) || role === 'warehouse_admin'
+}
+
 async function getSupplyEditorContext() {
   const supabase = await createClient()
+  const ctx = await requireMembershipContext()
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) throw new Error('Unauthorized')
-
-  const { data: profile, error } = await supabase
-    .from('profiles')
-    .select('organization_id, role')
-    .eq('id', user.id)
-    .single()
-
-  if (error || !profile?.organization_id) {
-    throw new Error('Workspace profile not found')
-  }
-
-  if (!['admin', 'editor'].includes(profile.role)) {
+  if (!canEditSupplies(ctx.orgRole)) {
     throw new Error('You do not have permission to modify supplies')
   }
 
-  return { supabase, profile }
+  return { supabase, organizationId: ctx.organizationId }
 }
 
 function revalidateSupplyPaths() {
@@ -43,7 +34,7 @@ export async function createSupplyItem(
   formData: FormData
 ): Promise<SupplyState> {
   try {
-    const { supabase, profile } = await getSupplyEditorContext()
+    const { supabase, organizationId } = await getSupplyEditorContext()
 
     const supplyName = String(formData.get('supplyName') || '').trim()
     const unitType = String(formData.get('unitType') || '').trim() || null
@@ -61,7 +52,7 @@ export async function createSupplyItem(
     }
 
     const { error } = await supabase.from('supply_items').insert({
-      organization_id: profile.organization_id,
+      organization_id: organizationId,
       supply_name: supplyName,
       unit_type: unitType,
       default_cost: defaultCost,
@@ -85,7 +76,7 @@ export async function updateSupplyItem(
   formData: FormData
 ): Promise<SupplyState> {
   try {
-    const { supabase, profile } = await getSupplyEditorContext()
+    const { supabase, organizationId } = await getSupplyEditorContext()
 
     const supplyItemId = String(formData.get('supplyItemId') || '').trim()
     const supplyName = String(formData.get('supplyName') || '').trim()
@@ -112,7 +103,7 @@ export async function updateSupplyItem(
         notes,
       })
       .eq('id', supplyItemId)
-      .eq('organization_id', profile.organization_id)
+      .eq('organization_id', organizationId)
 
     if (error) return { error: error.message }
 
@@ -126,7 +117,7 @@ export async function updateSupplyItem(
 }
 
 export async function toggleSupplyItemActive(formData: FormData) {
-  const { supabase, profile } = await getSupplyEditorContext()
+  const { supabase, organizationId } = await getSupplyEditorContext()
 
   const supplyItemId = String(formData.get('supplyItemId') || '').trim()
   const nextValue = String(formData.get('nextValue') || '').trim() === 'true'
@@ -137,7 +128,7 @@ export async function toggleSupplyItemActive(formData: FormData) {
     .from('supply_items')
     .update({ is_active: nextValue })
     .eq('id', supplyItemId)
-    .eq('organization_id', profile.organization_id)
+    .eq('organization_id', organizationId)
 
   if (error) throw new Error(error.message)
 

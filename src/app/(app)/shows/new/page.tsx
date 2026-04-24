@@ -1,133 +1,89 @@
-'use client'
+import { createClient } from '@/lib/supabase/server'
+import { requireMembershipContext } from '@/lib/auth-context'
+import { isLeadershipRole, type OrgRole } from '@/lib/permissions'
+import { getUserDisplayMap } from '@/lib/user-display'
+import { NewShowForm, type PMOption } from '@/components/shows/new-show-form'
 
-import { useFormState, useFormStatus } from 'react-dom'
-import { createShow, type CreateShowState } from '@/app/actions/shows'
-
-const initialState: CreateShowState = {}
-
-function SubmitButton() {
-  const { pending } = useFormStatus()
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="rounded-lg bg-slate-900 px-4 py-2 text-white disabled:opacity-50"
-    >
-      {pending ? 'Creating show...' : 'Create Show'}
-    </button>
-  )
+type VenueRow = {
+  id: string
+  name: string
+  address: string | null
+  city: string | null
+  state: string | null
+  primary_contact_name: string | null
+  primary_contact_email: string | null
+  primary_contact_phone: string | null
+  is_active: boolean | null
 }
 
-export default function NewShowPage() {
-  const [state, formAction] = useFormState(createShow, initialState)
+type MembershipRow = {
+  id: string
+  user_id: string
+  role: OrgRole
+  status: 'invited' | 'active' | 'disabled'
+}
+
+export default async function NewShowPage() {
+  const supabase = await createClient()
+  const ctx = await requireMembershipContext()
+
+  const { organizationId, orgRole } = ctx
+  const leadership = isLeadershipRole(orgRole)
+
+  const [{ data: venues, error: venuesError }, { data: memberships, error: membershipsError }] =
+    await Promise.all([
+      supabase
+        .from('venues')
+        .select(`
+          id,
+          name,
+          address,
+          city,
+          state,
+          primary_contact_name,
+          primary_contact_email,
+          primary_contact_phone,
+          is_active
+        `)
+        .eq('organization_id', organizationId)
+        .order('name', { ascending: true })
+        .returns<VenueRow[]>(),
+
+      leadership
+        ? supabase
+            .from('organization_memberships')
+            .select('id, user_id, role, status')
+            .eq('organization_id', organizationId)
+            .eq('status', 'active')
+            .in('role', ['project_manager', 'ops_manager', 'org_admin', 'owner'])
+            .order('created_at', { ascending: true })
+            .returns<MembershipRow[]>()
+        : Promise.resolve({ data: [], error: null }),
+    ])
+
+  if (venuesError) {
+    throw new Error(venuesError.message)
+  }
+
+  if (membershipsError) {
+    throw new Error(membershipsError.message)
+  }
+
+  const userDisplayMap = await getUserDisplayMap(
+    supabase,
+    (memberships ?? []).map((row) => row.user_id)
+  )
+
+  const pmOptions: PMOption[] = (memberships ?? []).map((row) => ({
+    membership_id: row.id,
+    name: userDisplayMap.get(row.user_id)?.label ?? row.user_id.slice(0, 8),
+  }))
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="rounded-2xl border bg-white p-6">
-        <h1 className="text-3xl font-bold">Create Show</h1>
-        <p className="mt-2 text-sm text-slate-600">
-          Add a new show to your workspace.
-        </p>
-      </div>
-
-      <form action={formAction} className="rounded-2xl border bg-white p-6 space-y-6">
-        <div className="grid gap-4 md:grid-cols-2">
-          <div>
-            <label className="block text-sm font-medium">Show Name</label>
-            <input
-              name="showName"
-              required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Show Number</label>
-            <input
-              name="showNumber"
-              required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-            />
-          </div>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          <div>
-            <label className="block text-sm font-medium">Client Name</label>
-            <input
-              name="clientName"
-              required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Venue Name</label>
-            <input
-              name="venueName"
-              required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-            />
-          </div>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-4">
-          <div>
-            <label className="block text-sm font-medium">City</label>
-            <input
-              name="city"
-              required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">State</label>
-            <input
-              name="state"
-              required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Start Date</label>
-            <input
-              name="startDate"
-              type="date"
-              required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">End Date</label>
-            <input
-              name="endDate"
-              type="date"
-              required
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-            />
-          </div>
-        </div>
-
-        <div className="max-w-sm">
-          <label className="block text-sm font-medium">Estimated Revenue</label>
-          <input
-            name="estimatedRevenue"
-            type="number"
-            step="0.01"
-            className="mt-1 w-full rounded-lg border px-3 py-2"
-          />
-        </div>
-
-        {state.error ? (
-          <p className="text-sm text-red-600">{state.error}</p>
-        ) : null}
-
-        <SubmitButton />
-      </form>
-    </div>
+    <NewShowForm
+      venues={venues ?? []}
+      isLeadership={leadership}
+      pmOptions={pmOptions}
+    />
   )
 }

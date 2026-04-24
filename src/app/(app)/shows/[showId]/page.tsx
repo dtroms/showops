@@ -6,5 +6,5 @@ export default async function ShowRootPage({
   params: Promise<{ showId: string }>
 }) {
   const { showId } = await params
-  redirect(`/shows/${showId}/budget-summary`)
+  redirect(`/shows/${showId}/show-details`)
 }
