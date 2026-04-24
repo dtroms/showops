@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { requireMembershipContext } from '@/lib/auth-context'
-import { isLeadershipRole, type OrgRole } from '@/lib/permissions'
+import { type OrgRole } from '@/lib/auth-context'
+import { isLeadershipRole } from '@/lib/permissions'
 import { getUserDisplayMap } from '@/lib/user-display'
 import { NewShowForm, type PMOption } from '@/components/shows/new-show-form'
 
