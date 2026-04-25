@@ -32,7 +32,12 @@ export async function saveFreelancerRatings(
   try {
     const supabase = await createClient()
     const ctx = await requireMembershipContext()
-    const { organizationId, membership, orgRole, userId } = ctx
+    const { organizationId, membership, orgRole } = ctx
+const userId = ctx.userId ?? null
+
+if (!userId) {
+  return { error: 'User not found.' }
+}
 
     const showId = String(formData.get('showId') || '').trim()
 
