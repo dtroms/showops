@@ -34,11 +34,11 @@ export async function saveFreelancerRatings(
     const ctx = await requireMembershipContext()
     const { organizationId, membership, orgRole } = ctx
 
-    const userId = ctx.userId
+const ratedByUserId = ctx.userId
 
-    if (typeof userId !== 'string' || userId.length === 0) {
-      return { error: 'User not found.' }
-    }
+if (!ratedByUserId) {
+  return { error: 'User not found.' }
+}
 
     const showId = String(formData.get('showId') || '').trim()
 
@@ -102,7 +102,7 @@ export async function saveFreelancerRatings(
         organization_id: organizationId,
         vendor_id: vendorId,
         show_id: showId,
-        rated_by_user_id: userId,
+        rated_by_user_id: ratedByUserId,
         rating,
         notes: notesRaw || null,
       })
