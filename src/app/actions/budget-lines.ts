@@ -381,9 +381,20 @@ export async function createBudgetLine(
     const hours = parsedHours.value
     const unitCost = parsedUnitCost.value ?? 0
 
-    if (sectionType === 'freelance_labor' && (!days || days <= 0)) {
-      days = getShowDayCount(show.start_date ?? null, show.end_date ?? null)
-    }
+if (sectionType === 'freelance_labor' && (!days || days <= 0)) {
+  const { data: showDates, error: showDatesError } = await supabase
+    .from('shows')
+    .select('start_date, end_date')
+    .eq('id', showId)
+    .eq('organization_id', organizationId)
+    .maybeSingle<{ start_date: string | null; end_date: string | null }>()
+
+  if (showDatesError) {
+    return { error: showDatesError.message }
+  }
+
+  days = getShowDayCount(showDates?.start_date ?? null, showDates?.end_date ?? null)
+}
 
     const calculationType = resolveCalculationType(sectionType, calculationTypeRaw, days, hours)
 
