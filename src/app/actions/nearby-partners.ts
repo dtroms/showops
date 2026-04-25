@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { requireMembershipContext } from '@/lib/auth-context'
-import { canAssignFreelancers, canRemoveFreelancers } from '@/lib/permissions'
+import { canEditBudgetStructure } from '@/lib/permissions'
 import { resolveShowAccess } from '@/lib/show-access'
 
 function revalidateNearbyPartnerPaths(showId: string) {
@@ -142,7 +142,7 @@ export async function addNearbyFreelancerToShow(formData: FormData) {
     orgRole,
   })
 
-  if (!canAssignFreelancers(access)) {
+  if (!canEditBudgetStructure(access)) {
     throw new Error('You do not have permission to assign freelancers to this show.')
   }
 
@@ -278,7 +278,7 @@ export async function removeFreelancerFromShow(formData: FormData) {
     orgRole,
   })
 
-  if (!canRemoveFreelancers(access)) {
+  if (!canEditBudgetStructure(access)) {
     throw new Error('You do not have permission to remove freelancers from this show.')
   }
 
