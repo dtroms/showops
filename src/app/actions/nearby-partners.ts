@@ -82,9 +82,7 @@ async function ensureVendorBudgetLine(params: {
     throw new Error(existingLineError.message)
   }
 
-  if (existingLine?.id) {
-    return
-  }
+  if (existingLine?.id) return
 
   const dayRate = Number(defaultDayRateSnapshot ?? 0)
   const days = getShowDayCount(startDate, endDate)
@@ -104,7 +102,7 @@ async function ensureVendorBudgetLine(params: {
       hours: null,
       unit_cost: dayRate,
       subtotal,
-      calculation_type: 'days',
+      calculation_type: 'days_x_unit_cost',
       overtime_enabled: false,
       overtime_hours: 0,
       overtime_rate: 0,
@@ -126,13 +124,8 @@ export async function addNearbyFreelancerToShow(formData: FormData) {
   const showId = String(formData.get('showId') || '').trim()
   const vendorId = String(formData.get('vendorId') || '').trim()
 
-  if (!showId) {
-    throw new Error('Show id is required.')
-  }
-
-  if (!vendorId) {
-    throw new Error('Vendor id is required.')
-  }
+  if (!showId) throw new Error('Show id is required.')
+  if (!vendorId) throw new Error('Vendor id is required.')
 
   const { access } = await resolveShowAccess({
     supabase,
@@ -262,13 +255,8 @@ export async function removeFreelancerFromShow(formData: FormData) {
   const showId = String(formData.get('showId') || '').trim()
   const assignmentId = String(formData.get('assignmentId') || '').trim()
 
-  if (!showId) {
-    throw new Error('Show id is required.')
-  }
-
-  if (!assignmentId) {
-    throw new Error('Assignment id is required.')
-  }
+  if (!showId) throw new Error('Show id is required.')
+  if (!assignmentId) throw new Error('Assignment id is required.')
 
   const { access } = await resolveShowAccess({
     supabase,
