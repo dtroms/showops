@@ -135,14 +135,13 @@ export async function createOrganizationInvite(
 
     const inviteUrl = `${appUrl}/invite?token=${invite.token}`
 
-    await logCreateAuditEvent({
-      organizationId,
-      actorUserId: userId,
-      actorMembershipId: membership.id,
-      entityType: 'organization_membership',
-      entityId: invite.id,
-      actionType: 'invite',
-      changeSummary: `Invited ${email} as ${role}`,
+await logCreateAuditEvent({
+  organizationId,
+  actorUserId: userId,
+  actorMembershipId: membership.id,
+  entityType: 'organization_membership',
+  entityId: invite.id,
+  changeSummary: `Invited ${email} as ${role}`,
       afterJson: {
         invite_id: invite.id,
         email,
@@ -211,14 +210,13 @@ export async function revokeOrganizationInvite(inviteId: string): Promise<Invite
       return { error: updateError.message }
     }
 
-    await logUpdateAuditEvent({
-      organizationId,
-      actorUserId: userId,
-      actorMembershipId: membership.id,
-      entityType: 'organization_membership',
-      entityId: inviteId,
-      actionType: 'disable',
-      changeSummary: `Revoked invite for ${invite.email}`,
+await logUpdateAuditEvent({
+  organizationId,
+  actorUserId: userId,
+  actorMembershipId: membership.id,
+  entityType: 'organization_membership',
+  entityId: inviteId,
+  changeSummary: `Revoked invite for ${invite.email}`,
       before: {
         revoked_at: null,
       },
