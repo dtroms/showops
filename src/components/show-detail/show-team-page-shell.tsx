@@ -319,11 +319,18 @@ export function ShowTeamPageShell({
         title="Assigned Team"
         actions={
           <div className="w-full max-w-sm">
-            <SearchInput
-              value={search}
-              onChange={setSearch}
-              placeholder="Search assigned team..."
-            />
+<SearchInput
+  value={search}
+  onChange={(value) => {
+    if (typeof value === 'string') {
+      setSearch(value)
+      return
+    }
+
+    setSearch(value.target.value)
+  }}
+  placeholder="Search assigned team..."
+/>
           </div>
         }
       >

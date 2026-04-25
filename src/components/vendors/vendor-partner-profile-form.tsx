@@ -235,7 +235,13 @@ export function VendorPartnerProfileForm({
               <select
                 name="serviceAreaMode"
                 defaultValue={vendor?.primary_service_area?.service_mode ?? 'local'}
-                onChange={(e) => setServiceMode(e.target.value)}
+                onChange={(e) => {
+  const value = e.target.value
+
+  if (value === 'local' || value === 'regional' || value === 'national') {
+    setServiceMode(value)
+  }
+}}
                 className={fieldClass()}
               >
                 <option value="local" className="bg-slate-900 text-white">Local</option>

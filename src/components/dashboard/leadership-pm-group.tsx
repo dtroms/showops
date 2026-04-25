@@ -3,7 +3,14 @@
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { formatCurrency, formatShortDate } from '@/lib/format'
-import type { LeadershipDashboardShow } from './leadership-dashboard-shell'
+import type { DashboardShow } from '@/app/(app)/dashboard/page'
+
+type LeadershipDashboardShow = DashboardShow & {
+  pm_assigned?: boolean
+  budget_status?: 'missing' | 'started' | 'ready'
+  freelancer_status?: 'missing' | 'assigned'
+  risk_flag?: 'healthy' | 'warning' | 'risk'
+}
 
 function riskClasses(risk: LeadershipDashboardShow['risk_flag']) {
   if (risk === 'risk') return 'border-rose-500/20 bg-rose-500/15 text-rose-300'
@@ -107,17 +114,19 @@ export function LeadershipPmGroup({
                       <p className="font-semibold text-white">{show.show_name}</p>
                       <p className="mt-1 text-xs text-slate-500">{show.show_number ?? '—'}</p>
                     </td>
-                    <td className="px-4 py-4">{formatShortDate(show.start_date)} - {formatShortDate(show.end_date)}</td>
+                    <td className="px-4 py-4">
+                      {formatShortDate(show.start_date)} - {formatShortDate(show.end_date)}
+                    </td>
                     <td className="px-4 py-4 text-slate-300">{show.status ?? '—'}</td>
                     <td className="px-4 py-4 text-slate-300">{show.pm_assigned ? 'Yes' : 'No'}</td>
-                    <td className="px-4 py-4 text-slate-300">{show.budget_status}</td>
-                    <td className="px-4 py-4 text-slate-300">{show.freelancer_status}</td>
+                    <td className="px-4 py-4 text-slate-300">{show.budget_status ?? 'missing'}</td>
+                    <td className="px-4 py-4 text-slate-300">{show.freelancer_status ?? 'missing'}</td>
                     <td className="px-4 py-4 text-slate-300">{formatCurrency(show.estimated_revenue)}</td>
                     <td className="px-4 py-4 font-medium text-emerald-300">{formatCurrency(show.projected_profit)}</td>
                     <td className="px-4 py-4 text-slate-300">{show.margin_percent ?? '—'}%</td>
                     <td className="px-4 py-4">
                       <span className={`inline-flex rounded-full border px-2 py-1 text-xs font-medium ${riskClasses(show.risk_flag)}`}>
-                        {show.risk_flag}
+                        {show.risk_flag ?? 'healthy'}
                       </span>
                     </td>
                     <td className="px-4 py-4">

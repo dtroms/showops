@@ -67,6 +67,11 @@ type ProfileRow = {
   full_name: string | null
 }
 
+type MembershipCursorRow = {
+  id: string
+  reports_to_membership_id: string | null
+}
+
 const VALID_ROLES: OrgRole[] = [
   'owner',
   'org_admin',
@@ -124,6 +129,27 @@ function assertCanAssignRole(actorRole: OrgRole, targetRole: OrgRole) {
       throw new Error('You do not have permission to assign that role.')
     }
   }
+}
+
+async function getMembershipCursor(params: {
+  supabase: Awaited<ReturnType<typeof createClient>>
+  organizationId: string
+  cursor: string
+}): Promise<{ data: MembershipCursorRow | null; error: string | null }> {
+  const { supabase, organizationId, cursor } = params
+
+  const result = await supabase
+    .from('organization_memberships')
+    .select('id, reports_to_membership_id')
+    .eq('id', cursor)
+    .eq('organization_id', organizationId)
+    .maybeSingle<MembershipCursorRow>()
+
+  if (result.error) {
+    return { data: null, error: result.error.message }
+  }
+
+  return { data: result.data ?? null, error: null }
 }
 
 async function countOwnersForOrg(params: {
@@ -550,7 +576,6 @@ export async function updateOrganizationUserManager(
         return { error: 'Selected manager cannot have direct reports.' }
       }
 
-      // prevent circular reporting chain
       let cursor: string | null = reportsToMembershipIdRaw
       const visited = new Set<string>([membershipId])
 
@@ -561,18 +586,17 @@ export async function updateOrganizationUserManager(
 
         visited.add(cursor)
 
-        const { data: cursorRow, error: cursorError } = await supabase
-          .from('organization_memberships')
-          .select('id, reports_to_membership_id')
-          .eq('id', cursor)
-          .eq('organization_id', organizationId)
-          .maybeSingle<{ id: string; reports_to_membership_id: string | null }>()
+        const cursorResult = await getMembershipCursor({
+          supabase,
+          organizationId,
+          cursor,
+        })
 
-        if (cursorError) {
-          return { error: cursorError.message }
+        if (cursorResult.error) {
+          return { error: cursorResult.error }
         }
 
-        cursor = cursorRow?.reports_to_membership_id ?? null
+        cursor = cursorResult.data?.reports_to_membership_id ?? null
       }
     }
 

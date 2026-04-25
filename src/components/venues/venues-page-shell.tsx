@@ -1,9 +1,9 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { VenuesFilterBar } from './venues-filter-bar'
-import { VenuesTable } from './venues-table'
-import { VenueFormModal } from './venue-form-modal'
+import { VenuesFilterBar } from '@/components/master-data/venues/venues-filter-bar'
+import { VenuesTable } from '@/components/master-data/venues/venues-table'
+import { VenueFormModal } from '@/components/master-data/venues/venue-form-modal'
 
 type Venue = {
   id: string

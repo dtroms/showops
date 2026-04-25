@@ -86,7 +86,12 @@ export function TeamStructurePanel({ members }: { members: MemberRow[] }) {
 
                     <td className="px-4 py-4">
                       {canHaveManager ? (
-                        <form action={updateMemberManager} className="flex items-center gap-2">
+                       <form
+  action={async (formData) => {
+    await updateMemberManager(initialState, formData)
+  }}
+  className="flex items-center gap-2"
+>
                           <input type="hidden" name="membershipId" value={member.membership_id} />
                           <select
                             name="reportsToMembershipId"

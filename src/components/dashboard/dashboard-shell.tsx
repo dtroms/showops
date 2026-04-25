@@ -2,29 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import type { DashboardShow } from '@/app/(app)/dashboard/page'
 import { DashboardFilteredChart } from './dashboard-filtered-chart'
 import { DashboardShowTable } from './dashboard-show-table'
 import { QuarterlyProfitBreakdown } from './quarterly-profit-breakdown'
-
-type DashboardShow = {
-  show_id: string
-  show_name: string
-  show_number: string | null
-  client_name: string | null
-  venue_name: string | null
-  city: string | null
-  start_date: string | null
-  end_date: string | null
-  status: string | null
-  estimated_revenue: number | null
-  gear_total: number | null
-  vendor_total: number | null
-  supply_total: number | null
-  travel_total: number | null
-  total_estimated_cost: number | null
-  projected_profit: number | null
-  margin_percent: number | null
-}
 
 export function DashboardShell({ shows }: { shows: DashboardShow[] }) {
   const [chartRange, setChartRange] = useState<'week' | 'month' | 'quarter' | 'year'>('month')

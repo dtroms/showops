@@ -105,7 +105,7 @@ async function getShowAccess(
     organizationId,
     membershipId,
     orgRole,
-  })
+  }) as unknown as Promise<{ show: ShowRow; access: ShowAccessContext }>
 }
 
 async function getOrCreateCurrentBudgetVersionId(params: {

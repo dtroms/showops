@@ -211,10 +211,17 @@ export function AllShowsPageShell({ shows }: { shows: Show[] }) {
           <div className="flex w-full flex-col gap-3 xl:w-auto xl:flex-row xl:items-center">
             <div className="w-full xl:w-72">
               <SearchInput
-                value={search}
-                onChange={setSearch}
-                placeholder="Search show, client, venue, PM, or market..."
-              />
+  value={search}
+  onChange={(value) => {
+    if (typeof value === 'string') {
+      setSearch(value)
+      return
+    }
+
+    setSearch(value.target.value)
+  }}
+  placeholder="Search show, client, venue, PM, or market..."
+/>
             </div>
 
             <input
