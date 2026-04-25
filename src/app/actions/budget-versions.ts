@@ -141,7 +141,7 @@ export async function duplicateBudgetVersion(params: {
   showId: string
   organizationId: string
 }) {
-  const supabase = await createServerSupabaseClient()
+  const supabase = await createClient()
 
   const {
     data: { user },
