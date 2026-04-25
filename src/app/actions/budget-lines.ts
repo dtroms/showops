@@ -27,9 +27,14 @@ type CalculationType =
 type ShowRow = {
   id: string
   organization_id: string
+  show_name: string | null
+  show_number: string | null
   status: string | null
+  estimated_revenue: number | null
   start_date: string | null
   end_date: string | null
+  lead_membership_id: string | null
+  created_by_membership_id: string | null
 }
 
 type BudgetLineRow = {
