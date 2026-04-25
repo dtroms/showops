@@ -234,7 +234,7 @@ async function getShowAccess(
   organizationId: string,
   membershipId: string,
   orgRole: ShowAccessContext['orgRole']
-): Promise<{ show: ShowRow; access: ShowAccessContext }> {
+) {
   return resolveShowAccess({
     supabase,
     showId,
